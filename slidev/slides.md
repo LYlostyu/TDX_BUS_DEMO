@@ -20,7 +20,7 @@ class: text-left
   <div class="mt-8 grid grid-cols-2 gap-4">
     <div class="p-5 rounded-2xl bg-white/5 border border-white/10">
       <div class="text-base opacity-70">Day 1</div>
-      <div class="text-xl font-semibold mt-1">Git + GitHub（40分鐘）</div>
+      <div class="text-xl font-semibold mt-1">Git + GitHub（90分鐘）</div>
       <div class="text-sm opacity-70 mt-2">
         clone / commit / push<br>
         branch / PR / review
@@ -37,7 +37,7 @@ class: text-left
   </div>
 
   <div class="mt-8 text-base opacity-70">
-    講師：yuyuedeluo　|　版本：v1.2
+    講師：yuyuedeluo　|　版本：v1.5
   </div>
 </div>
 
@@ -90,7 +90,6 @@ layout: default
 
 <div class="grid grid-cols-2 gap-10 items-center mt-6">
 
-  <!-- Left: Image -->
   <div>
     <img
       src="/images/git-flow.png"
@@ -102,7 +101,6 @@ layout: default
     </p>
   </div>
 
-  <!-- Right: Cards -->
   <div class="space-y-5">
     <div class="p-5 rounded-2xl bg-white/5 border border-white/10">
       <div class="text-lg font-semibold">工作區（Working Directory）</div>
@@ -205,7 +203,20 @@ layout: default
 
 # Git常用指令
 
-<div class="mt-4 grid grid-cols-2 gap-4">
+<div class="grid grid-cols-2 gap-3 items-center mt-6">
+
+  <div>
+    <img
+      src="/images/git-flow.png"
+      class="w-100 max-w-xl mx-auto rounded-lg shadow-md"
+      style="object-fit: contain;"
+    />
+    <p class="text-sm opacity-60 text-center mt-2">
+      Working Directory → Staging Area → Repository
+    </p>
+  </div>
+
+<div class="space-y-5">
 
   <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
     <div class="text-xl font-semibold mb-3">建立與檢查</div>
@@ -226,6 +237,7 @@ layout: default
   <div class=" text-sm opacity-70">記憶順序：<code>init → status → add → commit → log</code>
     </div>
 
+  </div>
 </div>
 
 <!--
@@ -234,30 +246,30 @@ Git 指令很多，但初學者先掌握最核心四個就能開始管理版本�
 -->
 
 ---
-layout: default
+layout: two-cols-header
 ---
 
 # Demo：初始化新專案
 
-<div class="grid grid-cols-2 gap-4 mt-4">
-
-  <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
-    <div class="text-xl font-semibold mb-3">建立資料夾 + 初始化</div>
+::left::
+<div class="pr-5">
+  
+<div class="text-xl font-semibold mb-3">建立資料夾 + 初始化</div>
 
 ```bash
 mkdir my-first-git
 cd my-first-git
 git init
-````
+```
 
 <div class="text-sm opacity-70 mt-3">
   <code>git init</code> 會建立 <code>.git</code>版本庫
 </div>
+</div>
+::right::
+<div class="pr-5">
 
-  </div>
-
-  <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
-    <div class="text-xl font-semibold mb-3">建立 README 後第一次提交</div>
+<div class="text-xl font-semibold mb-3">建立 README 後第一次提交</div>
 
 ```bash
 git status
@@ -270,20 +282,13 @@ git log
   <code>init → status → add → commit → log</code>
 </div>
 
-  </div>
-
 </div>
-   
-<br>
-
-####  做完你應該會看到：   
-##### <code>git log</code> 至少一筆 commit
 
 ---
 layout: default
 ---
 
-# 改動復原
+# 版本復原
 
 <div class="grid grid-cols-2 gap-4 mt-2">
 
@@ -325,7 +330,7 @@ git restore --staged <file>
 <div class="mt-4 p-6 rounded-2xl bg-white/5 border border-white/10">
   <div class="text-xl font-semibold mb-2">情境 C：已 commit，想回復到之前版本</div>
   <div class="text-sm opacity-70 mb-4">
-    用 <code>git revert</code> 產生一個「反向 commit」，保留歷史紀錄，最適合團隊協作
+    用 <code>git revert</code> 產生一個「反向 commit」，保留歷史紀錄
   </div>
 
 
@@ -363,7 +368,7 @@ layout: default
     <ul class="space-y-3 text-lg leading-relaxed">
       <li>小步提交：一次 commit 只做一件事</li>
       <li>動詞開頭、簡潔明瞭</li>
-      <li>讓人一眼看懂改動</li>
+      <li>讓人清楚看懂改動</li>
     </ul>
     <div class="mt-6 text-sm opacity-70">
       推薦格式：<code>&lt;type&gt;: &lt;what&gt;</code>
@@ -396,7 +401,7 @@ layout: default
 </div>
 
   <div class="mt-4 text-sm opacity-70">
-    commit沒有強制的規定，但重點是要清楚描述改動內容
+    commit沒有強制的規定，重點是要清楚描述改動內容
   </div>
 </div>
 
@@ -421,16 +426,16 @@ layout: two-cols-header
 
 # 練習：完成兩次 Commit
 
-### 任務 A
+### 任務 A : 初次提交
 
 <div class="text-sm opacity-80">
 目標：做出 <b>2 個 commit</b>，最後用 <code>git log --oneline</code> 看到兩筆紀錄
 </div>
 
 ::left::
-<div class="pr-10">    
+<div class="pr-5">    
 
-1.確認你在專案資料夾
+1. 確認你在專案資料夾
 
 - 你應該能看到專案檔案，或看到 <code>.git</code> 資料夾  
 - 如果不確定，先用下面指令確認目前路徑
@@ -447,9 +452,9 @@ dir
 
 ::right::
 
-<div class="pr-10">
+<div class="pr-5">
 
-2.建立 README.md
+2. 建立 README.md
 
 用 VS Code 新增檔案，打三行文字並儲存
 
@@ -477,9 +482,9 @@ layout: two-cols-header
 ---
 
 ::left::
-<div class="pr-10">  
+<div class="pr-5">  
 
-3.檢查狀態
+3. 檢查狀態
 ```bash
 git status
 ```
@@ -497,7 +502,7 @@ Untracked files:
 nothing added to commit but untracked files...
 ```
 
-4.加入暫存區（stage）
+4. 加入暫存區（stage）
 ```bash
 git add README.md
 ```
@@ -505,9 +510,9 @@ git add README.md
 
 ::right::
 
-<div class="pr-10">  
+<div class="pr-5">  
 
-5.再檢查一次（應該看到 README.md 在 staged）
+5. 再檢查一次（應該看到 README.md 在 staged）
 ```bash
 git status
 ```
@@ -524,7 +529,7 @@ Changes to be committed:
         new file:   note.txt
 ```
 
-6.提交（第一次 commit）
+6. 提交（第一次 commit）
 ```bash
 git commit -m "docs: add README.md"
 ```
@@ -559,14 +564,14 @@ layout: two-cols-header
 ::left::
 <div class="pr-10">
 
-1.修改 `README.md` 
+1. 修改 `README.md` 
 
 ```md
 - git commit 寫入歷史版本
 - git log 則查看歷史紀錄
 ```
 
-2.看看差異（改了哪些內容）
+2. 看看差異（改了哪些內容）
 
 ```bash
 git diff
@@ -592,13 +597,13 @@ index be2aa87..bbf9a92 100644
 
 <div class="pr-10">
 
-3.加入暫存區（stage）
+3. 加入暫存區（stage）
 
 ```bash
 git add README.md
 ```
 
-4.提交／第二次 commit
+4. 提交／第二次 commit
 
 ```bash
 git commit -m "docs: update README.md"
@@ -671,27 +676,22 @@ layout: default
 你已經把 Git 的基本功學完了：能新增檔案、看狀態、提交紀錄，還知道怎麼安全撤回。
 </div>
 
-<div class="mt-10 grid grid-cols-3 gap-6">
+<div class="mt-4 grid grid-cols-2 gap-4">
   <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
-    <div class="text-xl font-semibold mb-2">你會了什麼</div>
+    <div class="text-xl font-semibold mb-2">我們學了什麼</div>
     <ul class="text-base opacity-85 space-y-2 leading-relaxed">
+      <li><code>git init</code>     　初始化</li>
       <li><code>git status</code> 看狀態</li>
       <li><code>git add</code> 暫存（stage）</li>
       <li><code>git commit</code> 提交</li>
+      <li><code>git log</code>查看歷史</li>
     </ul>
   </div>
 
-  <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
-    <div class="text-xl font-semibold mb-2">你練了什麼</div>
-    <ul class="text-base opacity-85 space-y-2 leading-relaxed">
-      <li>做了 2 次 commit</li>
-      <li><code>git diff</code> 看差異</li>
-      <li><code>git log --oneline</code>查詢紀錄</li>
-    </ul>
-  </div>
+  
 
   <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
-    <div class="text-xl font-semibold mb-2">你能回溯版本</div>
+    <div class="text-xl font-semibold mb-2">版本回溯</div>
     <ul class="text-base opacity-85 space-y-2 leading-relaxed">
       <li>還沒 add：<code>git restore</code></li>
       <li>已 add：<code>git restore --staged</code></li>
@@ -700,8 +700,8 @@ layout: default
   </div>
 </div>
 
-<div class="mt-10 text-lg">
-下一步：GitHub 協作（<span class="opacity-90">branch / PR / review / merge</span>）
+<div class="mt-4 text-lg">
+下一章：GitHub 協作（<span class="opacity-90">branch / PR / review / merge</span>）
 </div>
 
 <!--
@@ -727,12 +727,12 @@ layout: two-cols-header
 
 # GitHub 是什麼？（Git vs GitHub）
 
-<div class="text-sm opacity-75 mt-1">
+<div class="text-sm opacity-85 mt-2">
 <b>Git</b> 是版本控制工具；<b>GitHub</b> 是把專案放到線上一起協作的平台
 </div>
 
-<div class="grid grid-cols-2 gap-4 mt-4">
-<div class="p-6 rounded-2xl bg-white/5 border border-white/10">
+<div class="mt-4 grid grid-cols-2 gap-4">
+  <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
   <div class="text-2xl font-semibold mb-4">Git（本地）</div>
   
   <ul class="space-y-3 text-lg leading-relaxed">
@@ -763,11 +763,6 @@ layout: two-cols-header
 </div>
 
 </div>
-
-<style>
-li { margin-left: 0.2rem; }
-code { padding: 0.1rem 0.35rem; border-radius: 0.4rem; background: rgba(255,255,255,.06); }
-</style>
 
 <!--
 一句話分清楚： Git 是你電腦上的版本控制工具。 GitHub 是放專案、做協作的線上平台。 左邊這個 Git，本地端： 它負責記錄每次變更、讓你回到任何版本。 右邊這個 GitHub，遠端： 它負責把專案放上去、讓別人看得到、可以一起 review、一起討論、一起合併。 所以 GitHub 不是 Git 的替代品，是把 Git 的協作能力放大。
@@ -918,7 +913,7 @@ layout: two-cols-header
 
 <div class="grid grid-cols-2 gap-4 mt-4">
   <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
-    <div class="text-xl font-semibold mb-3">1) 建立並切換分支</div>
+    <div class="text-xl font-semibold mb-3">1. 建立並切換分支</div>
     <div class="text-sm opacity-70 mb-3">建立新分支並立刻切過去</div>
 
 ```bash
@@ -928,7 +923,7 @@ git switch -c feature/ui
   </div>
 
   <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
-    <div class="text-xl font-semibold mb-3">2) 查看分支</div>
+    <div class="text-xl font-semibold mb-3">2. 查看分支</div>
     <div class="text-sm opacity-70 mb-3">確認你現在在哪個分支（有 * 的那個）</div>
 ```bash
 git branch
@@ -936,7 +931,7 @@ git branch
   </div>
 
   <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
-    <div class="text-xl font-semibold mb-3">3) 切回 main</div>
+    <div class="text-xl font-semibold mb-3">3. 切回 main</div>
     <div class="text-sm opacity-70 mb-3">準備把分支成果合回主線</div>
 ```bash
 git switch main
@@ -944,7 +939,7 @@ git switch main
   </div>
 
   <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
-    <div class="text-xl font-semibold mb-3">4) 合併分支</div>
+    <div class="text-xl font-semibold mb-3">4. 合併分支</div>
     <div class="text-sm opacity-70 mb-3">把 feature/ui 的提交合進 main</div>
 ```bash
 git merge feature/ui
@@ -1023,7 +1018,7 @@ layout: two-cols-header
 
   <!-- Left card -->
   <div class="p-7 rounded-2xl bg-white/5 border border-white/10">
-    <div class="text-2xl font-semibold mb-4">1) 我改了什麼（What）</div>
+    <div class="text-2xl font-semibold mb-4">1. 我改了什麼（What）</div>
     <ul class="space-y-3 text-lg">
       <li>具體做了哪些改動</li>
       <li>例：新增頁面、調整 CSS 排版</li>
@@ -1031,7 +1026,7 @@ layout: two-cols-header
 
   <div class="h-6"></div>
 
-  <div class="text-2xl font-semibold mb-4">2) 為什麼要改（Why）</div>
+  <div class="text-2xl font-semibold mb-4">2. 為什麼要改（Why）</div>
   <ul class="space-y-3 text-lg">
     <li>需求來源 / 修 bug 的原因</li>
     <li>讓別人知道你不是亂改</li>
@@ -1040,7 +1035,7 @@ layout: two-cols-header
 
   <!-- Right card -->
   <div class="p-7 rounded-2xl bg-white/5 border border-white/10">
-    <div class="text-2xl font-semibold mb-4">3) 怎麼測過（How tested）</div>
+    <div class="text-2xl font-semibold mb-4">3. 怎麼測過（How tested）</div>
     <ul class="space-y-3 text-lg">
       <li>你怎麼確認功能能跑</li>
       <li>例：本地跑過、測試通過、附上截圖</li>
@@ -1237,7 +1232,7 @@ layout: two-cols-header
 提交（commit）需要作者資訊；遠端協作時也常會用到一些基本設定
 </div>
 
-<div class="grid grid-cols-2 gap-10 mt-4">
+<div class="grid grid-cols-2 gap-4 mt-4">
 
   <div class="p-7 rounded-2xl bg-white/5 border border-white/10">
     <div class="text-2xl font-semibold mb-4">為什麼要設定？</div>
@@ -1301,7 +1296,7 @@ layout: two-cols-header
 Fork 用於「沒有原專案寫入權限」或「想保留一份自己的副本」時的協作情境
 </div>
 
-<div class="grid grid-cols-2 gap-10 mt-4">
+<div class="grid grid-cols-2 gap-4 mt-4">
 
   <div class="p-7 rounded-2xl bg-white/5 border border-white/10">
     <div class="text-2xl font-semibold mb-4">Fork 的概念</div>
@@ -1348,7 +1343,7 @@ layout: two-cols-header
 
 # Fork 工作流程（標準做法）
 
-<div class="grid grid-cols-2 gap-10 mt-4">
+<div class="grid grid-cols-2 gap-4 mt-4">
 
   <div class="p-7 rounded-2xl bg-white/5 border border-white/10">
     <div class="text-xl font-semibold mb-4">在 GitHub 上做</div>
@@ -1454,7 +1449,7 @@ layout: two-cols-header
 
 # 實作任務：Fork → 改 README → 開 PR
 
-<div class="grid grid-cols-2 gap-10 mt-4">
+<div class="grid grid-cols-2 gap-4 mt-4">
 
   <div class="p-7 rounded-2xl bg-white/5 border border-white/10">
     <div class="text-xl font-semibold mb-4">任務流程</div>
@@ -1496,7 +1491,7 @@ layout: two-cols-header
 Fork = 在 GitHub 上建立你自己的遠端副本
 </div>
 
-<div class="grid grid-cols-2 gap-10 mt-4">
+<div class="grid grid-cols-2 gap-4 mt-4">
 
   <div class="p-7 rounded-2xl bg-white/5 border border-white/10">
     <div class="text-xl font-semibold mb-4">在 GitHub 上操作</div>
@@ -1530,7 +1525,7 @@ layout: two-cols-header
 origin = 你的 fork（用於自己 push），upstream = 作者原 repo（用來同步更新）
 </div>
 
-<div class="grid grid-cols-2 gap-10 mt-4">
+<div class="grid grid-cols-2 gap-4 mt-4">
 
   <div class="p-7 rounded-2xl bg-white/5 border border-white/10">
     <div class="text-xl font-semibold mb-4">Clone（下載你的 fork）</div>
@@ -1577,7 +1572,7 @@ layout: two-cols-header
 一個任務一個分支，這次任務就是文件更新
 </div>
 
-<div class="grid grid-cols-2 gap-10 mt-4">
+<div class="grid grid-cols-2 gap-4 mt-4">
 
   <div class="p-7 rounded-2xl bg-white/5 border border-white/10">
     <div class="text-xl font-semibold mb-4">開分支</div>
@@ -1620,7 +1615,7 @@ layout: two-cols-header
 提交前先檢查差異與狀態，避免把不該提交的檔案送上去
 </div>
 
-<div class="grid grid-cols-2 gap-10 mt-4">
+<div class="grid grid-cols-2 gap-4 mt-4">
 
   <div class="p-7 rounded-2xl bg-white/5 border border-white/10">
     <div class="text-xl font-semibold mb-4">檢查差異</div>
@@ -1667,7 +1662,7 @@ layout: two-cols-header
 PR = 請求把你分支上的變更合併進原 repo 的 main
 </div>
 
-<div class="grid grid-cols-2 gap-10 mt-4">
+<div class="grid grid-cols-2 gap-4 mt-4">
 
   <div class="p-7 rounded-2xl bg-white/5 border border-white/10">
     <div class="text-xl font-semibold mb-4">在 GitHub 上開 PR</div>
@@ -1695,3 +1690,81 @@ PR = 請求把你分支上的變更合併進原 repo 的 main
   </div>
 
 </div>
+
+---
+layout: default
+---
+
+# 有趣的 GitHub 專案（靈感牆）
+
+<div class="text-sm opacity-75 mt-1">
+挑 1 個你最有興趣的：先讀 README → 看 Issues → 看 PR → 看 commits（理解一個專案怎麼被維護）
+</div>
+
+<div class="grid grid-cols-3 gap-3 mt-4">
+
+  <!-- 1) Image-to-Braille -->
+  <div class="p-7 rounded-2xl bg-white/5 border border-white/10">
+    <div class="text-xl font-semibold">Image-to-Braille</div>
+    <div class="text-sm opacity-75 mt-1">
+      把圖片轉成 Unicode 盲文點陣（Braille art）
+    </div>
+    <div class="mt-5 text-sm font-semibold opacity-90">功能</div>
+    <ul class="mt-2 space-y-2 text-base opacity-90">
+      <li>影像 → 灰階/抖動 → 點陣映射</li>
+      <li>輸入文字就能「顯示圖」</li>
+      <li>適合做小功能擴充：尺寸、對比、字元密度</li>
+    </ul>
+    <div class="mt-5 text-sm font-semibold opacity-90">Repo</div>
+    <div class="mt-2 text-sm">
+      <a class="underline underline-offset-4" href="https://github.com/505e06b2/Image-to-Braille" target="_blank" rel="noopener">
+        505e06b2/Image-to-Braille
+      </a>
+    </div>
+  </div>
+
+  <!-- 2) BetterLyrics -->
+  <div class="p-7 rounded-2xl bg-white/5 border border-white/10">
+    <div class="text-xl font-semibold">BetterLyrics</div>
+    <div class="text-sm opacity-75 mt-1">
+      高度可自訂的歌詞視覺化 + 音樂播放器（WinUI3 / Win2D）
+    </div>
+    <div class="mt-5 text-sm font-semibold opacity-90">功能</div>
+    <ul class="mt-2 space-y-2 text-base opacity-90">
+      <li>桌面 App 的 UI/動畫與渲染</li>
+      <li>偏完整產品：設定、體驗、工程結構</li>
+      <li>適合觀察如何拆模組、如何做可擴充功能</li>
+    </ul>
+    <div class="mt-5 text-sm font-semibold opacity-90">Repo</div>
+    <div class="mt-2 text-sm">
+      <a class="underline underline-offset-4" href="https://github.com/jayfunc/BetterLyrics" target="_blank" rel="noopener">
+        jayfunc/BetterLyrics
+      </a>
+    </div>
+  </div>
+
+  <!-- 3) Excalidraw -->
+  <div class="p-7 rounded-2xl bg-white/5 border border-white/10">
+    <div class="text-xl font-semibold">Excalidraw</div>
+    <div class="text-sm opacity-75 mt-1">
+      手繪風白板工具（支援協作、分享）
+    </div>
+    <div class="mt-5 text-sm font-semibold opacity-90">功能</div>
+    <ul class="mt-2 space-y-2 text-base opacity-90">
+      <li>前端大型專案結構（UI/狀態/資料）</li>
+      <li>協作功能：即時同步、分享流程</li>
+      <li>適合理解如何把產品做成可維護的工程</li>
+    </ul>
+    <div class="mt-5 text-sm font-semibold opacity-90">Repo</div>
+    <div class="mt-2 text-sm">
+      <a class="underline underline-offset-4" href="https://github.com/excalidraw/excalidraw" target="_blank" rel="noopener">
+        excalidraw/excalidraw
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<style>
+pre { margin: .35rem 0 !important; }
+</style>
