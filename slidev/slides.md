@@ -4,7 +4,7 @@ title: Git 教學
 info: |
   本課程：Git 基礎概念與核心指令（本地工作流）
 author: Luoyu
-version: 1.7
+version: 1.8
 layout: cover
 class: text-left
 ---
@@ -38,7 +38,7 @@ class: text-left
   </div>
 
   <div class="mt-8 text-base opacity-70">
-    講師：洛魚　|　版本：v1.7.1
+    講師：洛魚　|　版本：v1.8
   </div>
 </div>
 
@@ -219,6 +219,59 @@ git commit：這是最重要的一步。記得加上 -m 後接訊息，例如『
 git push：最後，將本地端的紀錄同步到雲端（如 GitHub），這確保了你的程式碼即使電腦壞了也不會消失。」
 -->
 
+
+---
+layout: two-cols-header
+---
+
+# Git config：設定你的身份
+<div class="text-sm opacity-75 mt-1">
+提交（commit）需要作者資訊；遠端協作時也常會用到一些基本設定
+</div>
+
+<div class="grid grid-cols-2 gap-4 mt-4">
+
+  <div class="p-7 rounded-2xl bg-white/5 border border-white/10">
+    <div class="text-2xl font-semibold mb-4">為什麼要設定？</div>
+    <ul class="space-y-3 text-lg">
+      <li><b>每一筆 commit</b> 都會記錄作者（name / email）</li>
+      <li>避免出現 <code>Author identity unknown</code> 之類錯誤</li>
+      <li><b>global</b>：整台電腦通用</li>
+      <li><b>local</b>：只套用在某個專案</li>
+    </ul>
+    <div class="mt-6 text-sm opacity-70">先設 global，若同一台電腦有不同身份，再用 local 覆蓋
+    </div>
+  </div>
+
+  <div class="p-7 rounded-2xl bg-white/5 border border-white/10">
+    <div class="text-2xl font-semibold mb-4">使用指令</div>
+
+```bash
+# 查看目前設定
+git config --list
+
+# 設定（整台電腦通用）
+git config --global user.name  "你的名字"
+git config --global user.email "你的信箱"
+
+# 只針對目前專案設定（會覆蓋 global）
+git config user.name  "專案用名字"
+git config user.email "專案用信箱"
+```
+
+
+  </div>
+
+</div>
+
+<!--
+講者稿（逐字稿，簡短版）：
+這一頁我們要把 git config 釐清楚。Git 在你每次 commit 的時候，都會把「作者名稱」和「作者信箱」寫進歷史紀錄，所以如果沒有設定，第一次 commit 常會直接失敗。
+global 的意思是這台電腦所有專案都用同一套設定；local 是只在目前專案生效，用來覆蓋 global。
+我建議大家先把 global 設起來，之後如果你在同一台電腦需要不同身份，例如學校專案與個人專案，再用 local 去覆蓋。
+最後提醒：設定完可以用 git log -1 看最新一筆 commit 的作者資訊是否正確。
+-->
+
 ---
 layout: default
 ---
@@ -339,58 +392,6 @@ git commit -m "docs: update README.md"
 pre { margin-top: 0.4rem !important; margin-bottom: 0.4rem !important; }
 </style>
 
-
----
-layout: two-cols-header
----
-
-# Demo：初始化新專案
-
-::left::
-<div class="pr-5">
-  
-<div class="text-xl font-semibold mb-3">建立資料夾 + 初始化</div>
-
-```bash
-mkdir my-first-git
-cd my-first-git
-git init
-```
-
-<div class="text-sm opacity-70 mt-3">
-  <code>git init</code> 會建立 <code>.git</code>版本庫
-</div>
-</div>
-::right::
-<div class="pr-5">
-
-<div class="text-xl font-semibold mb-3">建立 README 後第一次提交</div>
-
-```bash
-git status
-git add README.md
-git commit -m "init: add README"
-git log
-```
-
-<div class="text-sm opacity-70 mt-3">
-  <code>init → status → add → commit → log</code>
-</div>
-
-</div>
-
-<!--
-「接下來我們進入實作環節。
-
-git init：這是第一步，告訴 Git『請幫我監控這個資料夾』。執行後，你會發現資料夾多了一個隱藏的 .git 檔，那是它的資料庫。
-
-git add：當你修改完檔案，使用 git add . 將所有變更放入剛剛提到的『暫存區紙箱』。
-
-git commit：這是最重要的一步。記得加上 -m 後接訊息，例如『修正登入畫面標題』。這就是你為這個版本寫下的備忘錄。
-
-git push：最後，將本地端的紀錄同步到雲端（如 GitHub），這確保了你的程式碼即使電腦壞了也不會消失。」
--->
-
 ---
 layout: default
 ---
@@ -466,37 +467,31 @@ layout: two-cols-header
 ---
 
 # 練習：完成兩次 Commit
-
 ### 任務 A : 初次提交
-
 <div class="text-sm opacity-80">
 目標：做出 <b>2 個 commit</b>，最後用 <code>git log --oneline</code> 看到兩筆紀錄
-</div>
+</div>   
 
 ::left::
-<div class="pr-5">    
+<div class="pr-5 mt-2">    
 
-1. 確認你在專案資料夾
-
-- 你應該能看到專案檔案，或看到 <code>.git</code> 資料夾  
-- 如果不確定，先用下面指令確認目前路徑
+1. 確認你在專案資料夾\
+建立資料夾 + 初始化
 
 ```bash
-# Windows (PowerShell)
-pwd
-# macOS / Linux
-pwd
-# 或用 dir 看目前資料夾內容
-dir
-````
+git init
+```
+
+<div class="text-sm opacity-70 mt-3">
+  <code>git init</code> 會建立 <code>.git</code>版本庫
+</div>
 </div>
 
 ::right::
 
-<div class="pr-5">
+<div class="pr-5 mt-2">
 
-2. 建立 README.md
-
+2. 建立 README.md\
 用 VS Code 新增檔案，打三行文字並儲存
 
 ```md
@@ -721,7 +716,8 @@ layout: default
   <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
     <div class="text-xl font-semibold mb-2">我們學了什麼</div>
     <ul class="text-base opacity-85 space-y-2 leading-relaxed">
-      <li><code>git init</code>     　初始化</li>
+      <li><code>git init</code>初始化</li>
+      <li><code>git config</code>設定身分</li>
       <li><code>git status</code> 看狀態</li>
       <li><code>git add</code> 暫存（stage）</li>
       <li><code>git commit</code> 提交</li>
@@ -882,6 +878,41 @@ node -v # Should print "v24.13.0".
 npm -v # Should print "11.6.2".
 -->
 
+
+---
+layout:
+---
+
+# 練習：複製範例專案
+
+
+<div class="mt-2 p-5 rounded-2xl bg-white/5 border border-white/10">
+<div class="pr-2">
+1.打開終端機
+
+2.使用git clone複製範例專案
+
+```bash
+git clone https://github.com/LYlostyu/TDX_BUS_DEMO.git
+```
+
+3.確認資料夾中是否出現了 TDX_BUS_DEMO 資料夾。
+
+4.查看專案歷史
+
+```bash
+git log --oneline
+```
+
+5. 可自行探索
+</div>
+
+</div>
+
+<!--
+我們來做一次「刻意撞車」。 因為你真的解過一次衝突，之後就不怕了。 第一步：從 main 開 branch-A，改 README 第一行，commit。 第二步：切回 main，再開 branch-B，也改 README 同一行，commit。 第三步：切回 main，merge branch-A，通常會成功。 第四步：再 merge branch-B，這次就會衝突。 衝突出現後： 你打開 README，你會看到剛剛那種 <<<<<<< ======= >>>>>>> 的標記。 你決定要保留 A、保留 B、或自己整合一個版本。 最後刪掉標記，存檔。 然後： git add . git commit -m "fix: resolve conflict on README header" 這筆 commit 的意義是：我解決衝突，讓歷史再次回到可用狀態。
+-->
+
 ---
 layout: two-cols-header
 ---
@@ -954,34 +985,34 @@ layout: two-cols-header
 
 <div class="grid grid-cols-2 gap-4 mt-4">
   <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
-    <div class="text-xl font-semibold mb-3">1. 建立並切換分支</div>
-    <div class="text-sm opacity-70 mb-3">建立新分支並立刻切過去</div>
-
-```bash
-git switch -c feature/ui
-```
-
-  </div>
-
-  <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
-    <div class="text-xl font-semibold mb-3">2. 查看分支</div>
-    <div class="text-sm opacity-70 mb-3">確認你現在在哪個分支（有 * 的那個）</div>
+    <div class="text-xl font-semibold mb-3">1. 查看分支</div>
+    <div class="text-sm opacity-70 mb-3">確認你現在在哪個分支（符號 * 提示）</div>
 ```bash
 git branch
 ```
   </div>
 
   <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
-    <div class="text-xl font-semibold mb-3">3. 切回 main</div>
-    <div class="text-sm opacity-70 mb-3">準備把分支成果合回主線</div>
+    <div class="text-xl font-semibold mb-3">2. 建立並切換分支</div>
+    <div class="text-sm opacity-70 mb-3">建立新分支並立刻切過去</div>
+
 ```bash
-git switch main
+git switch -c <分支名稱>
+```
+<div class="text-sm opacity-70 mb-3">例：git switch -c feature/ui</div>
+  </div>
+
+  <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
+    <div class="text-xl font-semibold mb-3">3. 切回主支</div>
+    <div class="text-sm opacity-70 mb-3">準備把分支成果合回主支</div>
+```bash
+git switch master
 ```
   </div>
 
   <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
     <div class="text-xl font-semibold mb-3">4. 合併分支</div>
-    <div class="text-sm opacity-70 mb-3">把 feature/ui 的提交合進 main</div>
+    <div class="text-sm opacity-70 mb-3">把 feature/ui 的提交合進當前分支</div>
 ```bash
 git merge feature/ui
 ```
@@ -990,7 +1021,7 @@ git merge feature/ui
 </div>
 
 <div class="mt-5 text-sm opacity-70">
-補充：<code>git checkout -b feature/ui</code>（等同 <code>switch -c</code>）
+補充：<code>git checkout -b <分支></code>（等同 <code>switch -c</code>）
 </div>
 
 <style>
@@ -1000,6 +1031,129 @@ pre { margin: .4rem 0 !important; }
 <!--
 分支的最低配流程只要四步： 1 建立並切換分支： git switch -c feature/ui 2 看有哪些分支： git branch 3 切回 main： git switch main 4 合併分支： git merge feature/ui 你把它背起來，協作就能開始跑了。
 -->
+
+---
+layout: two-cols-header
+---
+
+# 衝突（Conflict）是什麼？
+
+<div class="grid grid-cols-2 gap-4 mt-4">
+
+
+<div class="mt-2 p-5 rounded-2xl bg-white/5 border border-white/10">
+<div class="text-xl font-semibold mb-4">常見原因</div>
+<ul class="space-y-2 text-lg">
+  <li>兩個分支同時改到同一段</li>
+  <li>Git 無法自動判斷要選誰</li>
+</ul>
+
+</div>
+
+
+<div class="mt-2 p-5 rounded-2xl bg-white/5 border border-white/10">
+<div class="text-xl font-semibold mb-4">你會看到的標記</div>
+```bash
+ <<<<<<< HEAD
+ （你的版本）
+ =======
+ （別人的版本）
+ >>>>>>> branch-A
+```
+
+<div class="text-sm opacity-70 mt-3">
+看到這些符號＝需要你手動選擇/合併內容，再把符號刪掉。
+</div>
+
+
+</div>
+
+</div>
+
+<style>
+/* 讓清單更舒服 */
+ul { margin: 0 !important; padding-left: 1.1rem; }
+
+/* code block 更緊湊，不要吃太多高度 */
+pre { margin: .35rem 0 !important; }
+
+/* 右邊卡片裡的 code 不要再額外留太多空 */
+.slidev-code { font-size: 0.95em; line-height: 1.35; }
+</style>
+
+<!--
+衝突不是壞事，它只是 Git 在說： 「你們兩個都改到同一段，我不知道要用哪個。」 常見原因就兩個： 兩個分支同時改到同一段， Git 無法自動判斷誰對。 你會看到的標記是這種： 　<<<<<<< HEAD ======= >>>>>>> branch-A 這時候你要做的事情也很單純： 打開檔案，決定要留哪個版本，或自己手動合成一個更好的版本， 然後把這些標記刪掉，存檔，再 add，再 commit。
+-->
+
+---
+layout: two-cols-header
+---
+
+# 練習：刻意製造一次衝突
+
+<div class="grid grid-cols-2 gap-4 mt-4">
+
+<div class="mt-2 p-5 rounded-2xl bg-white/5 border border-white/10">
+<div class="pr-10">
+
+1. 建立 branch-A 並改 README 某一行
+
+```bash
+git switch -c branch-A
+# edit README.md
+git add .
+git commit -m "feat: README header version A"
+```
+
+2. 建 branch-B 並改<span class="font-semibold text-xl">同一行
+</span>
+```bash
+git switch -c branch-B
+# edit README.md
+git add .
+git commit -m "feat: README header version B"
+```
+3. 在 branch-B 合併 branch-A（會衝突）
+
+```bash
+git merge branch-A
+```
+</div>
+</div>
+
+<div class="mt-2 p-5 rounded-2xl bg-white/5 border border-white/10">
+<div class="pl-2">
+
+
+
+4. 手動解衝突：在 README 中把標記刪掉，只保留你要的內容
+
+```bash
+ <<<<<<< HEAD
+ （branch-B 的版本）
+ =======
+ （branch-A 的版本）
+ >>>>>>> branch-A
+```
+5. 完成後提交
+
+```bash
+git add .
+git commit -m "fix: resolve conflict on README 
+header"
+```
+</div>
+</div>
+</div>
+
+<style>
+pre { margin: .35rem 0 !important; }
+</style>
+
+<!--
+我們來做一次「刻意撞車」。 因為你真的解過一次衝突，之後就不怕了。 第一步：從 main 開 branch-A，改 README 第一行，commit。 第二步：切回 main，再開 branch-B，也改 README 同一行，commit。 第三步：切回 main，merge branch-A，通常會成功。 第四步：再 merge branch-B，這次就會衝突。 衝突出現後： 你打開 README，你會看到剛剛那種 <<<<<<< ======= >>>>>>> 的標記。 你決定要保留 A、保留 B、或自己整合一個版本。 最後刪掉標記，存檔。 然後： git add . git commit -m "fix: resolve conflict on README header" 這筆 commit 的意義是：我解決衝突，讓歷史再次回到可用狀態。
+-->
+
 
 ---
 layout: two-cols-header
@@ -1018,7 +1172,7 @@ layout: two-cols-header
   <ul class="space-y-3 text-lg">
     <li>讓變更先被看過（review）</li>
     <li>提早抓 bug，減少事故</li>
-    <li>讓團隊理解你做了什麼</li>
+    <li>讓審查者理解你做了什麼</li>
   </ul>
 
   </div>
@@ -1033,8 +1187,7 @@ layout: two-cols-header
 
   
   </div>
-<div class="mt-5 text-sm opacity-70">開 PR 的目的，是大家一起提升專案的品質。
-  </div>
+開 PR 的目的，是大家一起提升專案的品質。
 </div>
 
 <style>
@@ -1140,192 +1293,6 @@ ol { margin: 0 !important; }
 這是一個很常用、也很安全的協作流程。 黃金法則：不要一次 PR 改太多。 流程是： 1 main 不直接改 2 每個任務開新分支 3 在分支上小步 commit 4 push 分支到 GitHub 5 開 PR，互相 review 6 approve 後 merge 回 main 你把它當作團隊的交通規則。 有規則，合作才不會撞車。
 -->
 
----
-layout: two-cols-header
----
-
-# 衝突（Conflict）是什麼？
-
-<div class="grid grid-cols-2 gap-4 mt-4">
-
-
-<div class="mt-2 p-5 rounded-2xl bg-white/5 border border-white/10">
-<div class="text-xl font-semibold mb-4">常見原因</div>
-<ul class="space-y-2 text-lg">
-  <li>兩個分支同時改到同一段</li>
-  <li>Git 無法自動判斷要選誰</li>
-</ul>
-
-</div>
-
-
-<div class="mt-2 p-5 rounded-2xl bg-white/5 border border-white/10">
-<div class="text-xl font-semibold mb-4">你會看到的標記</div>
-```bash
- <<<<<<< HEAD
- （你的版本）
- =======
- （別人的版本）
- >>>>>>> branch-A
-```
-
-<div class="text-sm opacity-70 mt-3">
-看到這些符號＝需要你手動選擇/合併內容，再把符號刪掉。
-</div>
-
-
-</div>
-
-</div>
-
-<style>
-/* 讓清單更舒服 */
-ul { margin: 0 !important; padding-left: 1.1rem; }
-
-/* code block 更緊湊，不要吃太多高度 */
-pre { margin: .35rem 0 !important; }
-
-/* 右邊卡片裡的 code 不要再額外留太多空 */
-.slidev-code { font-size: 0.95em; line-height: 1.35; }
-</style>
-
-<!--
-衝突不是壞事，它只是 Git 在說： 「你們兩個都改到同一段，我不知道要用哪個。」 常見原因就兩個： 兩個分支同時改到同一段， Git 無法自動判斷誰對。 你會看到的標記是這種： 　<<<<<<< HEAD ======= >>>>>>> branch-A 這時候你要做的事情也很單純： 打開檔案，決定要留哪個版本，或自己手動合成一個更好的版本， 然後把這些標記刪掉，存檔，再 add，再 commit。
--->
-
----
-layout: two-cols-header
----
-
-# 練習：刻意製造一次衝突
-
-<div class="grid grid-cols-2 gap-4 mt-4">
-
-<div class="mt-2 p-5 rounded-2xl bg-white/5 border border-white/10">
-<div class="pr-10">
-
-1. 建立 branch-A 並改 README 某一行
-
-```bash
-git switch -c branch-A
-# edit README.md
-git add .
-git commit -m "feat: README header version A"
-```
-
-2. 切回 main 建 branch-B 並改同一行
-
-```bash
-git switch main
-git switch -c branch-B
-# edit README.md
-git add .
-git commit -m "feat: README header version B"
-```
-3. 在 branch-B 合併 branch-A（會衝突）
-
-```bash
-git switch main
-git merge branch-A
-```
-</div>
-</div>
-
-<div class="mt-2 p-5 rounded-2xl bg-white/5 border border-white/10">
-<div class="pl-2">
-
-
-
-4. 手動解衝突：打開 README 把標記刪掉，保留你要的內容：
-
-```bash
- <<<<<<< HEAD
- （branch-B 的版本）
- =======
- （branch-A 的版本）
- >>>>>>> branch-A
-```
-5. 完成後提交
-
-```bash
-git add .
-git commit -m "fix: resolve conflict on README 
-header"
-```
-</div>
-</div>
-</div>
-
-<style>
-pre { margin: .35rem 0 !important; }
-</style>
-
-<!--
-我們來做一次「刻意撞車」。 因為你真的解過一次衝突，之後就不怕了。 第一步：從 main 開 branch-A，改 README 第一行，commit。 第二步：切回 main，再開 branch-B，也改 README 同一行，commit。 第三步：切回 main，merge branch-A，通常會成功。 第四步：再 merge branch-B，這次就會衝突。 衝突出現後： 你打開 README，你會看到剛剛那種 <<<<<<< ======= >>>>>>> 的標記。 你決定要保留 A、保留 B、或自己整合一個版本。 最後刪掉標記，存檔。 然後： git add . git commit -m "fix: resolve conflict on README header" 這筆 commit 的意義是：我解決衝突，讓歷史再次回到可用狀態。
--->
-
----
-layout: two-cols-header
----
-
-# Git config：設定你的身份
-<div class="text-sm opacity-75 mt-1">
-提交（commit）需要作者資訊；遠端協作時也常會用到一些基本設定
-</div>
-
-<div class="grid grid-cols-2 gap-4 mt-4">
-
-  <div class="p-7 rounded-2xl bg-white/5 border border-white/10">
-    <div class="text-2xl font-semibold mb-4">為什麼要設定？</div>
-    <ul class="space-y-3 text-lg">
-      <li><b>每一筆 commit</b> 都會記錄作者（name / email）</li>
-      <li>避免出現 <code>Author identity unknown</code> 之類錯誤</li>
-      <li><b>global</b>：整台電腦通用；<b>local</b>：只套用在某個專案</li>
-    </ul>
-    <div class="mt-6 text-sm opacity-70">先設 global，若同一台電腦有不同身份，再用 local 覆蓋
-    </div>
-  </div>
-
-  <div class="p-7 rounded-2xl bg-white/5 border border-white/10">
-    <div class="text-2xl font-semibold mb-4">常用指令</div>
-
-```bash
-# 查看目前設定
-git config --list
-
-# 設定（整台電腦通用）
-git config --global user.name  "你的名字"
-git config --global user.email "你的信箱"
-
-# 只針對目前專案設定（會覆蓋 global）
-git config user.name  "專案用名字"
-git config user.email "專案用信箱"
-
-# 看某一項設定
-git config user.name
-git config --global user.email
-```
-
-<div class="mt-4 text-sm opacity-70">
-  檢查 commit 作者是否正確：<code>git log -1</code>
-</div>
-
-  </div>
-
-</div>
-
-<style>
-pre { margin: .35rem 0 !important; }
-code { padding: .1rem .35rem; border-radius: .45rem; background: rgba(255,255,255,.06); }
-</style>
-
-<!--
-講者稿（逐字稿，簡短版）：
-這一頁我們要把 git config 釐清楚。Git 在你每次 commit 的時候，都會把「作者名稱」和「作者信箱」寫進歷史紀錄，所以如果沒有設定，第一次 commit 常會直接失敗。
-global 的意思是這台電腦所有專案都用同一套設定；local 是只在目前專案生效，用來覆蓋 global。
-我建議大家先把 global 設起來，之後如果你在同一台電腦需要不同身份，例如學校專案與個人專案，再用 local 去覆蓋。
-最後提醒：設定完可以用 git log -1 看最新一筆 commit 的作者資訊是否正確。
--->
 
 ---
 layout: two-cols-header
@@ -1382,7 +1349,7 @@ fork 常見在兩種情境：你沒有原 repo 的寫入權限，或你想保留
 layout: two-cols-header
 ---
 
-# Fork 工作流程（標準做法）
+# Fork 工作流程
 
 <div class="grid grid-cols-2 gap-4 mt-4">
 
@@ -1406,21 +1373,21 @@ fork → clone → 加 upstream → 開分支改 → push → 開 PR → 同步 
     <div class="text-xl font-semibold">在本機端做</div>
 
 ```bash
-# 1) clone 你自己的 fork（origin 會指向你的 fork）
+# 1. clone 你自己的 fork（origin 會指向你的 fork）
 git clone <your_fork_url>
 
-# 2) 加 upstream（指向原 repo）
+# 2. 加 upstream（指向原 repo）
 git remote add upstream <original_repo_url>
 git remote -v
 
-# 3) 從 main 開一個功能分支
+# 3. 從 main 開一個功能分支
 git switch -c feature/my-change
 
-# 4) 改檔 → add → commit
+# 4. 改檔 → add → commit
 git add .
 git commit -m "feat: ..."
 
-# 5) push 到你的 fork（origin）
+# 5. push 到你的 fork（origin）
 git push -u origin feature/my-change
 ```
 
@@ -1537,7 +1504,7 @@ Fork = 在 GitHub 上建立你自己的遠端副本
   <div class="p-7 rounded-2xl bg-white/5 border border-white/10">
     <div class="text-xl font-semibold mb-4">在 GitHub 上操作</div>
     <ol class="space-y-3 text-lg list-decimal pl-6">
-      <li>打開提供的原 repo 頁面</li>
+      <li>打開提供的 <a class="underline underline-offset-4" href="https://github.com/LYlostyu/TDX_BUS_DEMO" target="_blank" rel="noopener">repo</a> 頁面</li>
       <li>右上角按 <b>Fork</b></li>
       <li>Owner 選你的帳號，repo 名稱保留預設</li>
       <li>按 <b>Create fork</b></li>
@@ -1620,7 +1587,7 @@ layout: two-cols-header
 
 ```bash
 git switch -c docs/readme-update
-git status
+git branch
 ```
 
 <div class="mt-4 text-sm opacity-70">
@@ -1659,7 +1626,7 @@ layout: two-cols-header
 <div class="grid grid-cols-2 gap-4 mt-4">
 
   <div class="p-7 rounded-2xl bg-white/5 border border-white/10">
-    <div class="text-xl font-semibold mb-4">檢查差異</div>
+    <div class="text-xl font-semibold mb-4">檢查</div>
 
 ```bash
 git diff
@@ -1673,7 +1640,7 @@ git status
   </div>
 
   <div class="p-7 rounded-2xl bg-white/5 border border-white/10">
-    <div class="text-xl font-semibold mb-4">提交並推上去</div>
+    <div class="text-xl font-semibold mb-4">提交並推送</div>
 
 ```bash
 git add README.md
@@ -1752,8 +1719,8 @@ layout: default
     </div>
     <div class="mt-5 text-sm font-semibold opacity-90">功能</div>
     <ul class="mt-2 space-y-2 text-base opacity-90">
-      <li>影像 → 灰階/抖動 → 點陣映射</li>
-      <li>輸入文字就能「顯示圖」</li>
+      <li>影像 → 灰階 → 點陣映射</li>
+      <li>輸入圖就能顯示文字</li>
       <li>適合做小功能擴充：尺寸、對比、字元密度</li>
     </ul>
     <div class="mt-5 text-sm font-semibold opacity-90">Repo</div>
@@ -1806,16 +1773,12 @@ layout: default
 
 </div>
 
-<style>
-pre { margin: .35rem 0 !important; }
-</style>
-
 ---
 layout: default
 ---
 
 # 5 小時競賽規則與建議
-<div class="text-sm opacity-75 mt-1">
+<div class="text-sm opacity-75">
   成果可以是「作品」或「專案計畫」，不一定要完成可展示系統
 </div>
 
@@ -1825,35 +1788,34 @@ import { ref } from 'vue'
 const showPlanModal = ref(false)
 
 const rules = [
-  "總時長 6 小時，小組合作",
-  "每組需建立 GitHub Repo，並於繳交時提供 Repo 連結",
-  "README.md 為必要文件（專案說明 / 計畫內容 / 操作方式）",
+  "總時長 5 小時，小組合作",
+  "每組需建立GitHub Repo，於繳交時提供 Repo 連結",
+  "README.md 為必要文件（專案說明 / 計畫內容）",
   "需使用 Git 進行版本管理（commit 紀錄視為成果的一部分）",
-  "不可提交 .env / API key / token，不要上傳 node_modules 或大量 log",
-  "活動結束後，每組有 8 分鐘成果報告時間",
+  "每組有 8 分鐘成果報告時間",
 ]
 
 const deliverables = [
-  { title: "可運作 Demo", desc: "能跑的最小原型：功能少也可以，但要可操作。" },
+  { title: "可運作 Demo", desc: "能跑的原型：功能少也可以，但要可操作。" },
   { title: "半成品 + 說明", desc: "核心功能完成，搭配架構、限制與下一步規劃。" },
   { title: "專案計畫書（可選）", desc: "不一定要做出作品。請用計畫呈現你的想法。" },
 ]
 
 const planChecklist = [
   "問題定義：要解決什麼？誰會用？",
-  "解決方案：功能範圍與取捨（MVP）",
+  "解決方案：功能範圍與取捨",
   "系統架構 / 流程圖：前後端、資料流、頁面流程",
-  "分工與時程：6 小時內怎麼切任務",
+  "分工與時程：5 小時內怎麼切任務",
   "驗證方式：如何測試或展示成果",
 ]
 </script>
 
-<div class="h-full w-full px-10 py-6">
-  <div class="grid grid-cols-2 gap-6">
+<div class="h-full w-full  py-4">
+  <div class="grid grid-cols-2 gap-4">
     <!-- Left -->
     <div class="space-y-4">
       <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
-        <div class="text-xl font-semibold mb-3">基本規則（請務必完成）</div>
+        <div class="text-xl font-semibold mb-3">基本規則（務必達成）</div>
         <ul class="space-y-2">
           <li v-for="(r, i) in rules" :key="i" class="flex gap-2">
             <span class="opacity-70">•</span>
@@ -1865,7 +1827,7 @@ const planChecklist = [
     <!-- Right -->
     <div class="space-y-4">
       <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
-        <div class="text-xl font-semibold mb-3">可提交成果（擇一即可）</div>
+        <div class="text-xl font-semibold mb-3">提交成果（擇一即可）</div>
         <div class="space-y-3">
           <div
             v-for="(d, i) in deliverables"
@@ -1876,13 +1838,11 @@ const planChecklist = [
             <div class="text-[14px] opacity-80 mt-1 leading-2">{{ d.desc }}</div>
           </div>
         </div>
-        <div class="mt-4 pt-4 border-t border-white/10 flex items-center justify-between gap-4">
+        <div class="mt-2 pt-2 border-t border-white/10 flex items-center gap-4">
           <button
             class="px-4 py-2 rounded-xl border border-white/20 bg-black/30 hover:bg-white/10 transition font-semibold whitespace-nowrap"
             @click="showPlanModal = true"
-          >
-            計畫書建議內容
-          </button>
+          >計畫書建議內容</button>
           <div class="text-xs opacity-70 leading-5">
             選「專案計畫書」的組別<br />請點此查看 checklist
           </div>
@@ -1900,7 +1860,7 @@ const planChecklist = [
     <!-- Modal 本體 -->
     <div class="w-[720px] max-w-[92vw] rounded-3xl border border-white/15 bg-[#0f0f0f] p-8 shadow-2xl">
       <div class="flex items-start justify-between mb-4">
-        <div class="text-2xl font-bold">計畫書建議內容（計畫組重點）</div>
+        <div class="text-2xl font-bold">計畫書建議內容</div>
         <button class="text-white/60 hover:text-white text-xl" @click="showPlanModal = false">✕</button>
       </div>
       <ul class="space-y-3">
@@ -1922,7 +1882,7 @@ const planChecklist = [
 </div>
 
 ---
-layout: center
+layout: default
 ---
 
 <div class="text-center">
@@ -1930,14 +1890,13 @@ layout: center
 # 成果評量與發表說明
 </div>
 
-
 <script setup>
 const grading = ["問題清楚", "解法合理", "說明完整", "Git 使用正確", "README 品質", "分工與過程可追蹤"]
 </script>
 
-<div class="h-full w-full flex flex-col justify-center px-20">
+<div class="h-full w-full flex flex-col">
 
-  <div class="grid grid-cols-2 gap-10">
+  <div class="grid grid-cols-2 gap-4">
     <!-- 評量重點 -->
     <div class="rounded-3xl border border-white/10 bg-white/5 p-8">
       <div class="text-2xl font-semibold mb-5">評量重點</div>
@@ -1950,7 +1909,7 @@ const grading = ["問題清楚", "解法合理", "說明完整", "Git 使用正�
           {{ g }}
         </span>
       </div>
-      <div class="mt-6 text-lg opacity-80 leading-5">
+      <div class="mt-3">
         評分會重視你們如何定義問題、如何設計解法、  
         以及你們在有限時間內做出的取捨與規劃能力。
       </div>
@@ -1963,7 +1922,7 @@ const grading = ["問題清楚", "解法合理", "說明完整", "Git 使用正�
           <li>每組一定要繳交 <span class="font-semibold">GitHub Repo 連結</span></li>
           <li>Repo 內一定要有 <span class="font-semibold">README.md</span></li>
           <li>README 必須能看懂你們在做什麼、怎麼想、怎麼規劃</li>
-          <li>🎤 活動結束後，每組有 <span class="font-semibold text-xl">8 分鐘成果報告</span></li>
+          <li>每組有 <span class="font-semibold text-xl">8 分鐘成果報告</span></li>
         </ul>
       </div>
     </div>
