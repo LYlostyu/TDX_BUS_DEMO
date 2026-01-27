@@ -3,8 +3,7 @@ theme: default
 title: Git 教學
 info: |
   本課程：Git 基礎概念與核心指令（本地工作流）
-author: Luoyu
-version: 1.7
+author: yuyuedeluo
 layout: cover
 class: text-left
 ---
@@ -21,7 +20,7 @@ class: text-left
   <div class="mt-8 grid grid-cols-2 gap-4">
     <div class="p-5 rounded-2xl bg-white/5 border border-white/10">
       <div class="text-base opacity-70">Day 1</div>
-      <div class="text-xl font-semibold mt-1">Git + GitHub（80分鐘）</div>
+      <div class="text-xl font-semibold mt-1">Git + GitHub（90分鐘）</div>
       <div class="text-sm opacity-70 mt-2">
         clone / commit / push<br>
         branch / PR / review
@@ -29,7 +28,7 @@ class: text-left
     </div>
     <div class="p-5 rounded-2xl bg-white/5 border border-white/10">
       <div class="text-base opacity-70">Day 2</div>
-      <div class="text-xl font-semibold mt-1">專案競賽（5 小時）</div>
+      <div class="text-xl font-semibold mt-1">專案競賽（6 小時）</div>
       <div class="text-sm opacity-70 mt-2">
         Issue 分工 / PR 合併<br>
         Demo + 成果展示
@@ -38,14 +37,12 @@ class: text-left
   </div>
 
   <div class="mt-8 text-base opacity-70">
-    講師：洛魚　|　版本：v1.7
+    講師：yuyuedeluo　|　版本：v1.5
   </div>
 </div>
 
 <!--
-【內容：Git 版本控制：從零開始的備份與協作藝術】
-
-「各位同學大家好。歡迎參加今天的課程。在我們開始學習寫程式之後，大家一定遇過一個問題：當你改動了程式碼卻發現跑不動，想換回昨天的版本，卻發現已經忘記改了哪裡。今天，我們要學習業界最標準的解決方案——Git。這不只是一個工具，更是一種讓你的開發過程變得『有跡可循』的思維方式。」
+各位今天我們要學的東西很簡單：Git 不是魔法，它是一套「讓你回到過去、也能跟別人合作」的版本控制工具。 你們有程式基礎，所以你們一定遇過： 檔名最後變成 final、final2、final_final、final_final_really 的那種地獄。 Git 做的事情，就是把這些「存檔點」變成有系統、可追蹤、可以回復的歷史紀錄。 今天的目標只有三個： 第一，你會在本機做 commit，做出可回溯的歷史。 第二，你會把專案丟到 GitHub，知道 push / pull 在幹嘛。 第三，你會用 branch + PR 做協作，並且知道衝突怎麼解。 如果你今天結束後能做到：不怕改壞、不怕合作、不怕衝突，這堂課就成功。
 -->
 
 ---
@@ -82,11 +79,7 @@ layout: default
 </div>
 
 <!--
-【內容：Git 與非 Git 的對比】
-
-「我們先來看這張圖。在沒有 Git 的情況下，大家通常是用手動複製檔案來做備份，檔名可能會變成『final』、『final(1)』甚至『final-真的最後一版』。這種方式不僅佔空間，最痛苦的是當多人合作時，你很難知道誰改了哪一部分，甚至會發生覆蓋掉別人程式碼的慘劇。
-
-有了 Git 之後，每一筆改動都像是有了一台時光機。你可以隨時追溯歷史、回溯到特定時間點，且每一筆紀錄都清楚標示了『誰、在什麼時間、改了什麼內容』。這就是版本控制的核心意義。」
+一句話：Git 是「版本控制」。它不是雲端、不是上傳工具，它是記錄你每次變更的歷史。 你可以把 Git 想成： 每一次 commit 就像遊戲存檔點。 你不只存檔，你還可以看差異、回到某個時間點、把兩條故事線合在一起。 而且 Git 不是只有給工程師用，它其實是給「會一直改東西的人」用。你寫程式、做簡報、寫報告，都會一直改，所以你一定用得到。
 -->
 
 ---
@@ -141,15 +134,7 @@ layout: default
 </div>
 
 <!--
-【內容：工作區、暫存區、儲存庫】
-
-「要學好 Git，必須理解這三個區域的運作。請大家想像你在整理書房：
-
-工作區 (Working Directory)：就是你的書桌，你正在寫程式、修改檔案的地方。
-
-暫存區 (Staging Area / Index)：這像是一個搬家紙箱。你覺得這幾個檔案改好了，就把它們放進箱子準備封箱。
-
-儲存庫 (Repository / Commit)：當你下達 commit 指令，就像是把箱子封好並貼上標籤，正式存入倉庫。這就是一個永久的版本紀錄。」
+Git 有三個區域，我只用一句話把它講清楚： 工作區（working directory）：你正在編輯的檔案。 暫存區（stage）：你「選好要提交」的檔案清單。 倉庫（repository）：真正被寫進歷史的 commit。 很多新手卡住是因為少了暫存區這一層， 但你把它想成：我不是把整個資料夾拍照，我是先圈選要拍的東西，圈選完再按快門。 圈選就是 git add，按快門就是 git commit。
 -->
 
 ---
@@ -209,15 +194,7 @@ layout: default
 </div>
 
 <!--
-「接下來我們進入實作環節。
-
-git init：這是第一步，告訴 Git『請幫我監控這個資料夾』。執行後，你會發現資料夾多了一個隱藏的 .git 檔，那是它的資料庫。
-
-git add：當你修改完檔案，使用 git add . 將所有變更放入剛剛提到的『暫存區紙箱』。
-
-git commit：這是最重要的一步。記得加上 -m 後接訊息，例如『修正登入畫面標題』。這就是你為這個版本寫下的備忘錄。
-
-git push：最後，將本地端的紀錄同步到雲端（如 GitHub），這確保了你的程式碼即使電腦壞了也不會消失。」
+我們先做第一次設定。這是一次性的，之後每個專案都不用重做。 第一步，確認你電腦有 Git： git --version 第二步，設定你的名字跟 email。這不是密碼，只是讓 commit 有作者資訊： git config --global user.name "你的名字" git config --global user.email "你的信箱" 你可以問我：不設定會怎樣？ 會出現錯誤，因為 Git 不知道這筆歷史紀錄要掛誰的名字。
 -->
 
 ---
@@ -264,13 +241,8 @@ layout: default
 </div>
 
 <!--
-「接下來我們進入實作環節。
-
-git init：這是第一步，告訴 Git『請幫我監控這個資料夾』。執行後，你會發現資料夾多了一個隱藏的 .git 檔，那是它的資料庫。
-
-git add：當你修改完檔案，使用 git add . 將所有變更放入剛剛提到的『暫存區紙箱』。
-
-git commit：這是最重要的一步。記得加上 -m 後接訊息，例如『修正登入畫面標題』。這就是你為這個版本寫下的備忘錄。
+Git 指令很多，但初學者先掌握最核心四個就能開始管理版本。
+今天只要基礎的 4 個指令就能開始： git status：看現在發生什麼事 git add：選好要提交的檔案 git commit：做一個存檔點 git log：看歷史 你等一下會一直看到我在打 status。 新手最需要的能力不是背指令，是「先看狀態再動手」。
 -->
 
 ---
@@ -311,18 +283,6 @@ git log
 </div>
 
 </div>
-
-<!--
-「接下來我們進入實作環節。
-
-git init：這是第一步，告訴 Git『請幫我監控這個資料夾』。執行後，你會發現資料夾多了一個隱藏的 .git 檔，那是它的資料庫。
-
-git add：當你修改完檔案，使用 git add . 將所有變更放入剛剛提到的『暫存區紙箱』。
-
-git commit：這是最重要的一步。記得加上 -m 後接訊息，例如『修正登入畫面標題』。這就是你為這個版本寫下的備忘錄。
-
-git push：最後，將本地端的紀錄同步到雲端（如 GitHub），這確保了你的程式碼即使電腦壞了也不會消失。」
--->
 
 ---
 layout: default
@@ -1787,7 +1747,7 @@ layout: default
   <div class="p-7 rounded-2xl bg-white/5 border border-white/10">
     <div class="text-xl font-semibold">Excalidraw</div>
     <div class="text-sm opacity-75 mt-1">
-      手繪風白板工具（支援協作/分享）
+      手繪風白板工具（支援協作、分享）
     </div>
     <div class="mt-5 text-sm font-semibold opacity-90">功能</div>
     <ul class="mt-2 space-y-2 text-base opacity-90">
@@ -1808,163 +1768,3 @@ layout: default
 <style>
 pre { margin: .35rem 0 !important; }
 </style>
-
----
-layout: default
----
-
-# 5 小時競賽規則與建議
-<div class="text-sm opacity-75 mt-1">
-  成果可以是「作品」或「專案計畫」，不一定要完成可展示系統
-</div>
-
-<script setup>
-import { ref } from 'vue'
-
-const showPlanModal = ref(false)
-
-const rules = [
-  "總時長 6 小時，小組合作",
-  "每組需建立 GitHub Repo，並於繳交時提供 Repo 連結",
-  "README.md 為必要文件（專案說明 / 計畫內容 / 操作方式）",
-  "需使用 Git 進行版本管理（commit 紀錄視為成果的一部分）",
-  "不可提交 .env / API key / token，不要上傳 node_modules 或大量 log",
-  "活動結束後，每組有 8 分鐘成果報告時間",
-]
-
-const deliverables = [
-  { title: "可運作 Demo", desc: "能跑的最小原型：功能少也可以，但要可操作。" },
-  { title: "半成品 + 說明", desc: "核心功能完成，搭配架構、限制與下一步規劃。" },
-  { title: "專案計畫書（可選）", desc: "不一定要做出作品。請用計畫呈現你的想法。" },
-]
-
-const planChecklist = [
-  "問題定義：要解決什麼？誰會用？",
-  "解決方案：功能範圍與取捨（MVP）",
-  "系統架構 / 流程圖：前後端、資料流、頁面流程",
-  "分工與時程：6 小時內怎麼切任務",
-  "驗證方式：如何測試或展示成果",
-]
-</script>
-
-<div class="h-full w-full px-10 py-6">
-  <div class="grid grid-cols-2 gap-6">
-    <!-- Left -->
-    <div class="space-y-4">
-      <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
-        <div class="text-xl font-semibold mb-3">基本規則（請務必完成）</div>
-        <ul class="space-y-2">
-          <li v-for="(r, i) in rules" :key="i" class="flex gap-2">
-            <span class="opacity-70">•</span>
-            <span class="text-[15px] leading-6">{{ r }}</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <!-- Right -->
-    <div class="space-y-4">
-      <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
-        <div class="text-xl font-semibold mb-3">可提交成果（擇一即可）</div>
-        <div class="space-y-3">
-          <div
-            v-for="(d, i) in deliverables"
-            :key="i"
-            class="rounded-xl border border-white/10 bg-black/20 p-4"
-          >
-            <div class="font-semibold">{{ d.title }}</div>
-            <div class="text-[14px] opacity-80 mt-1 leading-2">{{ d.desc }}</div>
-          </div>
-        </div>
-        <div class="mt-4 pt-4 border-t border-white/10 flex items-center justify-between gap-4">
-          <button
-            class="px-4 py-2 rounded-xl border border-white/20 bg-black/30 hover:bg-white/10 transition font-semibold whitespace-nowrap"
-            @click="showPlanModal = true"
-          >
-            計畫書建議內容
-          </button>
-          <div class="text-xs opacity-70 leading-5">
-            選「專案計畫書」的組別<br />請點此查看 checklist
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal 遮罩 -->
-  <div
-    v-if="showPlanModal"
-    class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
-    @click.self="showPlanModal = false"
-  >
-    <!-- Modal 本體 -->
-    <div class="w-[720px] max-w-[92vw] rounded-3xl border border-white/15 bg-[#0f0f0f] p-8 shadow-2xl">
-      <div class="flex items-start justify-between mb-4">
-        <div class="text-2xl font-bold">計畫書建議內容（計畫組重點）</div>
-        <button class="text-white/60 hover:text-white text-xl" @click="showPlanModal = false">✕</button>
-      </div>
-      <ul class="space-y-3">
-        <li v-for="(p, i) in planChecklist" :key="i" class="flex gap-3 items-start">
-          <span class="mt-1 text-white/40">●</span>
-          <span class="text-[16px] leading-7">{{ p }}</span>
-        </li>
-      </ul>
-      <div class="mt-6 flex items-center justify-between">
-        <button
-          class="px-5 py-2 rounded-xl border border-white/20 bg-white/10 hover:bg-white/20 transition"
-          @click="showPlanModal = false"
-        >
-          關閉
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
----
-layout: center
----
-
-<div class="text-center">
-
-# 成果評量與發表說明
-</div>
-
-
-<script setup>
-const grading = ["問題清楚", "解法合理", "說明完整", "Git 使用正確", "README 品質", "分工與過程可追蹤"]
-</script>
-
-<div class="h-full w-full flex flex-col justify-center px-20">
-
-  <div class="grid grid-cols-2 gap-10">
-    <!-- 評量重點 -->
-    <div class="rounded-3xl border border-white/10 bg-white/5 p-8">
-      <div class="text-2xl font-semibold mb-5">評量重點</div>
-      <div class="flex flex-wrap gap-3">
-        <span
-          v-for="(g, i) in grading"
-          :key="i"
-          class="px-4 py-2 rounded-full border border-white/15 bg-black/20 text-base"
-        >
-          {{ g }}
-        </span>
-      </div>
-      <div class="mt-6 text-lg opacity-80 leading-5">
-        評分會重視你們如何定義問題、如何設計解法、  
-        以及你們在有限時間內做出的取捨與規劃能力。
-      </div>
-    </div>
-    <!-- 提醒 -->
-    <div class="rounded-3xl border border-white/10 bg-white/5 p-8 flex flex-col justify-between">
-      <div>
-        <div class="text-2xl font-semibold mb-5">提醒</div>
-        <ul class="space-y-4 text-lg leading-8">
-          <li>每組一定要繳交 <span class="font-semibold">GitHub Repo 連結</span></li>
-          <li>Repo 內一定要有 <span class="font-semibold">README.md</span></li>
-          <li>README 必須能看懂你們在做什麼、怎麼想、怎麼規劃</li>
-          <li>🎤 活動結束後，每組有 <span class="font-semibold text-xl">8 分鐘成果報告</span></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
