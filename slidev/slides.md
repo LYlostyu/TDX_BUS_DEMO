@@ -4,7 +4,7 @@ title: Git 教學
 info: |
   本課程：Git 基礎概念與核心指令（本地工作流）
 author: Luoyu
-version: 1.9
+version: 2.0
 layout: cover
 class: text-left
 ---
@@ -38,7 +38,7 @@ class: text-left
   </div>
 
   <div class="mt-8 text-base opacity-70">
-    講師：洛魚　|　版本：v1.9
+    講師：洛魚　|　版本：v2.0
   </div>
 </div>
 
