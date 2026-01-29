@@ -28,11 +28,14 @@ async function submit() {
     message.value = '請填名字'
     return
   }
+  if (!isValidEmail.value) {
+    message.value = '請輸入有效的電子信箱'
+    return
+  }
   if (!isValidUrl.value) {
     message.value = 'Repo 連結看起來不是 GitHub URL'
     return
   }
-
   loading.value = true
   try {
     const res = await fetch('/api/submit', {
@@ -52,15 +55,9 @@ async function submit() {
       message.value = data?.error || `送出失敗（${res.status}）`
       return
     }
-    if (!isValidEmail.value) {
-      message.value = '請輸入有效的電子信箱'
-      return
-    }
 
     ok.value = true
     message.value = '已送出！你可以去找助教確認是否有收到'
-    // 可選：送出後鎖住輸入，或清空
-    // name.value = ''; repoUrl.value=''; note.value=''
   } catch (e) {
     message.value = '送出失敗：網路或伺服器錯誤'
   } finally {
