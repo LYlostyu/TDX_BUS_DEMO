@@ -77,12 +77,11 @@ async function submit() {
       <label class="text-sm opacity-80">名字</label>
       <input v-model="name" class="p-1 rounded-lg bg-black/30 border border-white/10" placeholder="請填寫你的名字" />
 
-      <label class="text-sm opacity-80">GitHub Repo 連結</label>
-      <input v-model="repoUrl" class="p-1 rounded-lg bg-black/30 border border-white/10" placeholder="https://github.com/xxx/yyy" />
-
       <label class="text-sm opacity-80">聯絡信箱</label>
       <input v-model="email" class="p-2 rounded-lg bg-black/30 border border-white/10" placeholder="example@gmail.com" />
 
+      <label class="text-sm opacity-80">GitHub Repo 連結</label>
+      <input v-model="repoUrl" class="p-1 rounded-lg bg-black/30 border border-white/10" placeholder="https://github.com/xxx/yyy" />
 
       <label class="text-sm opacity-80">備註（可選）</label>
       <input v-model="note" class="p-1 rounded-lg bg-black/30 border border-white/10" placeholder="例如：專案完成度/呈現方式/發表需求" />
