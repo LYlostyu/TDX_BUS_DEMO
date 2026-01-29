@@ -25,12 +25,24 @@ tdx-bus-demo/
 - 複製 `.env.example` 成 `frontend/.env`，調整 `VITE_API_BASE` 如需要
 
 ## 啟動 Backend（FastAPI）
+
+**Windows cmd**:
 ```powershell
-python -m venv .venv
-.\.venv\Scripts\activate
-pip install -r backend/requirements.txt
-copy .env.example backend\.env  # 或手動建立
 cd backend
+python -m venv .venv
+.\.venv\Scripts\activate.bat
+pip install -r requirements.txt
+copy ..\.env.example .env
+python app\main.py
+```
+
+**Unix shell (Mac & Linux)**:
+```bash
+cd backend
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+cp ../.env.example .env
 python app/main.py
 ```
 
@@ -40,7 +52,7 @@ python app/main.py
 - `GET /api/routes/{route}/stop-etas?city=Taipei` — 後端合併站點順序與 ETA，前端使用
 
 ## 啟動 Frontend（Vite + Vue）
-```powershell
+```cmd
 cd frontend
 copy ..\.env.example .env  # 或手動建立
 npm install
