@@ -5,15 +5,21 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { team, repoUrl, note } = req.body || {}
+    const { team, email, repoUrl, note } = req.body || {}
 
     if (!team || typeof team !== 'string') {
-      return res.status(400).json({ error: 'team is required' })
+      return res.status(400).json({ error: 'name is required' })
     }
     if (!repoUrl || typeof repoUrl !== 'string') {
       return res.status(400).json({ error: 'repoUrl is required' })
     }
+    if (!email || typeof email !== 'string') {
+      return res.status(400).json({ error: 'email is required' })
+    }
 
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return res.status(400).json({ error: 'Invalid email' })
+    }
     if (team.length > 50) return res.status(400).json({ error: 'team too long' })
     if (repoUrl.length > 200) return res.status(400).json({ error: 'repoUrl too long' })
 
@@ -38,6 +44,7 @@ export default async function handler(req, res) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         team,
+        email,
         repoUrl,
         note: typeof note === 'string' ? note : '',
         submittedAt: new Date().toISOString(),

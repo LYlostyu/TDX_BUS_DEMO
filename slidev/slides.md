@@ -4,7 +4,7 @@ title: Git 教學
 info: |
   本課程：Git 基礎概念與核心指令（本地工作流）
 author: Luoyu
-version: 2.0
+version: 2.1
 layout: cover
 class: text-left
 ---
@@ -38,7 +38,7 @@ class: text-left
   </div>
 
   <div class="mt-8 text-base opacity-70">
-    講師：洛魚　|　版本：v2.0
+    講師：洛魚　|　版本：v2.1
   </div>
 </div>
 
@@ -511,13 +511,25 @@ layout: two-cols-header
 </div>   
 
 ::left::
-<div class="pr-5 mt-2">    
-1. 確認你在專案資料夾
+<div class="pr-5 mt-2"> 
+1. 設定作者名稱與信箱
+<div class="text-sm">雙引號內請填入自己的資訊
+</div>
+```bash
+git config --global user.name  "你的名字"
+git config --global user.email "你的信箱"
+```
+</div>
+
+
+<div class="pr-5 mt-5">    
+2. 確認你在專案資料夾
 
 <div class="text-sm">建立資料夾 + 初始化</div>
 
 ```bash
 git init
+
 ```
 
 <div class="text-sm opacity-70 mt-3">
@@ -525,11 +537,12 @@ git init
 </div>
 </div>
 
+
 ::right::
 
 <div class="pr-5 mt-2">
 
-2. 建立 README.md
+3. 建立 README.md
 <div class="text-sm">用 VS Code 新增檔案，並做編輯</div>
 
 ```md
@@ -558,7 +571,7 @@ layout: two-cols-header
 ::left::
 <div class="pr-5">  
 
-3. 檢查狀態
+4. 檢查狀態
 ```bash
 git status
 ```
@@ -576,7 +589,7 @@ Untracked files:
 nothing added to commit but untracked files...
 ```
 
-4. 加入暫存區（stage）
+5. 加入暫存區（stage）
 ```bash
 git add README.md
 ```
@@ -586,7 +599,7 @@ git add README.md
 
 <div class="pr-5">  
 
-5. 再檢查一次（應該看到 README.md 在 staged）
+6. 再檢查一次（應該看到 README.md 在 staged）
 ```bash
 git status
 ```
@@ -603,7 +616,7 @@ Changes to be committed:
         new file:   README.md
 ```
 
-6. 提交（第一次 commit）
+7. 提交（第一次 commit）
 ```bash
 git commit -m "docs: add README.md"
 ```
@@ -1192,6 +1205,7 @@ pre { margin: .35rem 0 !important; }
 
 ---
 layout: two-cols-header
+hide: true
 ---
 
 # 練習：刻意製造一次衝突
@@ -1509,7 +1523,7 @@ layout: two-cols-header
 <div class="grid grid-cols-2 gap-4 mt-4">
 
   <div class="p-7 rounded-2xl bg-white/5 border border-white/10">
-    <div class="text-xl font-semibold mb-4">在 GitHub 上做</div>
+    <div class="text-xl font-semibold mb-4">在 GitHub 上</div>
     <ol class="space-y-3 text-lg list-decimal pl-6">
       <li>到原 repo，按 <b>Fork</b></li>
       <li>到你自己的 fork repo，複製 URL</li>
@@ -1709,7 +1723,7 @@ origin = 你的 fork（用於自己 push），upstream = 作者原 repo（用來
 
 ```bash
 git clone <你的_fork_URL>
-cd tdx-bus-demo
+cd TDX_BUS_DEMO
 git remote -v
 ````
 
@@ -1818,7 +1832,7 @@ git push -u origin docs/readme-update
 ```
 
 <div class="mt-4 text-sm opacity-70">
-  <code>-u</code>：把本地分支和遠端分支綁定，之後直接 <code>git push</code> 即可
+  <code>-u</code>把本地分支和遠端分支綁定，之後就可只<code>git push</code> 
 </div>
 
   </div>
@@ -1864,6 +1878,48 @@ PR = 請求把你分支上的變更合併進原 repo 的 main
 <div class="mt-6 text-sm opacity-70">標題可以用 <code>docs:</code> 開頭，例如 <code>docs: add troubleshooting section</code>
 </div>
 
+  </div>
+
+</div>
+
+---
+layout: two-cols-header
+---
+
+# 小示範：用 VSCode 側欄 AI 做一個簡單貪吃蛇
+
+<div class="text-sm opacity-75 mt-1">
+目標：與 AI 協作，開發專案
+</div>
+
+<div class="grid grid-cols-2 gap-4 mt-4">
+
+  <div class="p-5 rounded-2xl bg-white/5 border border-white/10">
+    <div class="text-xl font-semibold mb-2">在 VSCode 側欄 AI 下指令</div>
+    <ol class="space-y-1 text-sm list-decimal pl-6">
+      <li>在 VSCode 打開一個新資料夾（例如 <code>snake-demo</code>）</li>
+      <li>建立檔案 <code>index.html</code></li>
+      <li>打開側欄 AI（Copilot Chat / Gemini / ChatGPT 擴充都可）</li>
+      <li>貼上下面這段需求，請 AI 直接產生程式碼</li>
+    </ol>
+    <pre class="mt-1 text-sm p-4 leading-6 rounded-xl bg-black/30 border border-white/10 whitespace-pre-wrap"><code>請幫我做一個最小可玩的貪吃蛇遊戲：
+- 一個 20x20 格子的 canvas 或方格
+- 方向鍵控制移動
+- 蛇吃到食物會變長 +1
+- 撞牆或自己就 Game Over，顯示分數並可按 R 重來
+- 我直接用瀏覽器打開就能玩
+- 建立README說明如何操作</code></pre>
+  </div>
+
+  <div class="p-5 rounded-2xl bg-white/5 border border-white/10">
+    <div class="text-xl font-semibold mb-4">實際運行 + 小幅修正</div>
+    <ul class="space-y-1 text-sm">
+      <li>把 AI 產生的內容存檔</li>
+      <li>用瀏覽器開啟</li>
+      <li>按方向鍵開始玩，確認遊戲功能齊全</li>
+      <li>如果速度太快或太慢：嘗試與 AI 溝同闡明需求</li>
+      <li>如果產生bug：嘗試與 AI 溝同解決</li>
+    </ul>
   </div>
 
 </div>
@@ -2095,51 +2151,58 @@ layout: default
 layout: default
 ---
 
-# 5 小時競賽規則與建議
+# 5 小時競賽規則
 <div class="text-sm opacity-75">
-  成果可以是「作品」或「專案計畫」，不一定要完成可展示系統
+  個人專案為主（可協作，但需明確分工與分支規範）。
 </div>
 
 <script setup>
 import { ref } from 'vue'
 
-const showPlanModal = ref(false)
+const showTeamModal = ref(false)
 
 const rules = [
-  "總時長 5 小時，小組合作",
-  "每組需建立GitHub Repo，於繳交時提供 Repo 連結",
-  "README.md 為必要文件（專案說明 / 計畫內容）",
+  "總時長 5 小時，開放無限制使用 AI 工具",
+  "以個人開發為主（開放協作，但必須符合協作規則）",
+  "每人需建立 GitHub Repo，繳交時提供 Repo 連結",
+  "README.md 為必要文件（專案說明 / 功能）",
   "需使用 Git 進行版本管理（commit 紀錄視為成果的一部分）",
-  "每組有 8 分鐘成果報告時間",
+  "加分項：若使用 TDX API + 專案範例後端可額外加分（加分不多）",
 ]
 
 const deliverables = [
-  { title: "可運作 Demo", desc: "能跑的原型：功能少也可以，但要可操作。" },
-  { title: "半成品 + 說明", desc: "核心功能完成，搭配架構、限制與下一步規劃。" },
-  { title: "專案計畫書（可選）", desc: "不一定要做出作品。請用計畫呈現你的想法。" },
+  { title: "可運作 Demo", desc: "能跑的原型：功能少也可以，但要可操作、可展示流程。" },
+  { title: "半成品 + 說明 / 計畫", desc: "核心功能完成一部分，附上限制、目前進度與下一步規劃。" },
+  { title: "Repo + README", desc: "必須提供 Repo 連結，並確保 README 讓評審能快速理解與操作。" },
 ]
 
-const planChecklist = [
-  "問題定義：要解決什麼？誰會用？",
-  "解決方案：功能範圍與取捨",
-  "系統架構 / 流程圖：前後端、資料流、頁面流程",
-  "分工與時程：5 小時內怎麼切任務",
-  "驗證方式：如何測試或展示成果",
+const teamChecklist = [
+  "協作限制：允許協作，但必須有明確分工",
+  "分支規範：組內每人至少一個分支（不要全部在 main）",
+  "合併方式：以 PR 方式合併回 main",
+  "提交方式：繳交 Repo 連結時，請確認 main 分支能正常執行 / 展示",
 ]
 </script>
 
-<div class="h-full w-full  py-4">
+<div class="h-full w-full py-4">
   <div class="grid grid-cols-2 gap-4">
     <!-- Left -->
-    <div class="space-y-4">
+    <div class="space-y-2">
       <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
-        <div class="text-xl font-semibold mb-3">基本規則（務必達成）</div>
-        <ul class="space-y-2">
-          <li v-for="(r, i) in rules" :key="i" class="flex gap-2">
-            <span class="opacity-70">-</span>
-            <span class="text-[15px] leading-8">{{ r }}</span>
-          </li>
-        </ul>
+        <div class="text-xl font-semibold mb-2">基本規則</div>
+        <li v-for="(r, i) in rules" :key="i" class="flex gap-2">
+          <span class="opacity-70">-</span>
+          <span class="text-[15px] leading-8">{{ r }}</span>
+        </li>
+      </div>
+      <div class="mt-2 pt-2 border-t border-white/10 flex items-center gap-4">
+        <button
+          class="px-12 py-4 rounded-xl border border-white/20 bg-black/30 hover:bg-white/10 transition font-semibold whitespace-nowrap"
+          @click="showTeamModal = true"
+        >多人組隊協作規則</button>
+        <div class="text-xs opacity-70 leading-5">
+          若要多人協作，請務必遵守分支與分工規範
+        </div>
       </div>
     </div>
     <!-- Right -->
@@ -2153,16 +2216,7 @@ const planChecklist = [
             class="rounded-xl border border-white/10 bg-black/20 p-4"
           >
             <div class="font-semibold">{{ d.title }}</div>
-            <div class="text-[14px] opacity-80 mt-1 leading-2">{{ d.desc }}</div>
-          </div>
-        </div>
-        <div class="mt-3 pt-3 border-t border-white/10 flex items-center gap-4">
-          <button
-            class="px-12 py-4 rounded-xl border border-white/20 bg-black/30 hover:bg-white/10 transition font-semibold whitespace-nowrap"
-            @click="showPlanModal = true"
-          >計畫書建議內容</button>
-          <div class="text-xs opacity-70 leading-5">
-            選「專案計畫書」的組別<br />請點此查看 checklist
+            <div class="text-[14px] opacity-80 mt-1 leading-5">{{ d.desc }}</div>
           </div>
         </div>
       </div>
@@ -2171,29 +2225,23 @@ const planChecklist = [
 
   <!-- Modal 遮罩 -->
   <div
-    v-if="showPlanModal"
+    v-if="showTeamModal"
     class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
-    @click.self="showPlanModal = false"
+    @click.self="showTeamModal = false"
   >
     <!-- Modal 本體 -->
     <div class="w-[720px] max-w-[92vw] rounded-3xl border border-white/15 bg-[#0f0f0f] p-8 shadow-2xl">
       <div class="flex items-start justify-between mb-4">
-        <div class="text-2xl font-bold">計畫書建議內容</div>
-        <button class="text-white/60 hover:text-white text-xl" @click="showPlanModal = false">✕</button>
+        <div class="text-2xl font-bold">多人組隊協作規則</div>
+        <button class="text-white/60 hover:text-white text-xl" @click="showTeamModal = false">✕</button>
       </div>
       <ul class="space-y-3">
-        <li v-for="(p, i) in planChecklist" :key="i" class="flex gap-3 items-start">
+        <li v-for="(p, i) in teamChecklist" :key="i" class="flex gap-3 items-start">
           <span class="mt-1 text-white/40">-</span>
           <span class="text-[16px] leading-10">{{ p }}</span>
         </li>
       </ul>
       <div class="mt-6 flex items-center justify-between">
-        <button
-          class="px-5 py-2 rounded-xl border border-white/20 bg-white/10 hover:bg-white/20 transition"
-          @click="showPlanModal = false"
-        >
-          關閉
-        </button>
       </div>
     </div>
   </div>
@@ -2203,50 +2251,115 @@ const planChecklist = [
 layout: default
 ---
 
-<div class="text-center">
-
-# 成果評量與發表說明
-</div>
-
 <script setup>
-const grading = ["問題清楚", "解法合理", "說明完整", "Git 使用正確", "README 品質", "分工與過程可追蹤"]
+import { reactive, ref } from 'vue'
+
+const showBonus = ref(false)
+
+const criteria = [
+  "有在時限內完成交付（ repo 連結）",
+  "主題清楚（你做了什麼？）",
+  "完成基本功能（至少做出一個可用功能）",
+  "可操作 Demo（能運行、能操作、能展示）",
+  "Git 使用正確（有意義的 commit 訊息）",
+  "分支使用（至少一個分支以上）",
+  "Repo 連結可打開、 main 可跑",
+  "介面/輸出清楚（畫面或輸出能夠被理解）",
+  "README 清楚（如何使用 / 功能介紹）",
+  "展示說明完整（限制 + 下一步規劃）",
+]
+
+const mark = reactive(Array(criteria.length).fill(0))
+
+function toggle(i) {
+  mark[i] = (mark[i] + 1) % 2
+}
+
+function symbol(i) {
+  return mark[i] === 1 ? '☒' : '☐'
+}
+
+function pillClass(i) {
+  return mark[i] === 1
+    ? 'bg-green-500/15 border-green-400/30'
+    : 'bg-black/20 border-white/15'
+}
 </script>
 
-<div class="h-full w-full flex flex-col">
-
+<div class="h-full w-full flex flex-col py-4">
   <div class="grid grid-cols-2 gap-4">
-    <!-- 評量重點 -->
-    <div class="rounded-3xl border border-white/10 bg-white/5 p-8">
-      <div class="text-2xl font-semibold mb-5">評量重點</div>
-      <div class="flex flex-wrap gap-3">
+    <!-- Left: 評分項目 -->
+    <div class="rounded-3xl border border-white/10 bg-white/5 p-5">
+      <div class="flex items-center justify-between mb-2">
+        <div class="text-2xl font-semibold">評分標準（10 項，每項 1 分）</div>
+      </div>
+      <div class="flex flex-wrap gap-1">
         <span
-          v-for="(g, i) in grading"
+          v-for="(c, i) in criteria"
           :key="i"
-          class="px-4 py-2 rounded-full border border-white/15 bg-black/20 text-base"
+          class="px-3 py-1 rounded-full border border-white/15 bg-black/20 text-[12px]"
         >
-          {{ g }}
+          {{ i + 1 }}. {{ c }}
         </span>
       </div>
-      <div class="mt-3">
-        評分會重視你們如何定義問題、如何設計解法、  
-        以及你們在有限時間內做出的取捨與規劃能力。
+      <div class="mt-1">
+        <button
+          class="px-3 py-1 rounded-xl border border-white/20 bg-black/30 hover:bg-white/10 transition text-sm font-semibold whitespace-nowrap"
+          @click="showBonus = true"
+          type="button"
+        >
+          Bonus 加分（點擊查看）
+        </button>
+      </div>
+      <div class="mt-1 text-sm opacity-75 leading-5">
+        重點：你是否能透過與 AI 的協作，理解一個專案如何從「想法」到「可運作成果」，包含問題定義、功能取捨，以及如何在有限時間內令專案「可理解、可展示、可追蹤」。
       </div>
     </div>
-    <!-- 提醒 -->
-    <div class="rounded-3xl border border-white/10 bg-white/5 p-8 flex flex-col justify-between">
-      <div>
-        <div class="text-2xl font-semibold mb-5">提醒</div>
-        <ul class="space-y-4 text-lg leading-8">
-          <li>每組一定要繳交 <span class="font-semibold">GitHub Repo 連結</span></li>
-          <li>Repo 內一定要有 <span class="font-semibold">README.md</span></li>
-          <li>README 必須能看懂你們在做什麼、怎麼想、怎麼規劃</li>
-          <li>每組有 <span class="font-semibold text-xl">8 分鐘成果報告</span></li>
-        </ul>
+    <div class="rounded-3xl border border-white/10 bg-white/5 p-5">
+      <div class="text-2xl font-semibold mb-3">自我檢核表</div>
+
+<ul class="grid grid-cols-2 gap-2">
+  <div v-for="(t, i) in criteria" :key="i">
+    <button
+      class="w-full text-left flex items-start gap-2 rounded-xl border px-3 py-2 hover:bg-white/5 transition"
+      :class="pillClass(i)"
+      @click="toggle(i)"
+      type="button"
+    >
+      <span class="mt-0.5 text-base w-6 text-center select-none">
+        {{ symbol(i) }}
+      </span>
+      <span class="text-[13px] leading-6 opacity-90">
+        <span class="opacity-70">{{ i + 1 }}.</span> {{ t }}
+      </span>
+    </button>
+  </div>
+</ul>
+    </div>
+  </div>
+
+  <div
+    v-if="showBonus"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
+    @click.self="showBonus = false"
+  >
+    <div class="w-[720px] max-w-[92vw] rounded-3xl border border-white/15 bg-[#0f0f0f] p-8 shadow-2xl">
+      <div class="flex items-start justify-between mb-3">
+        <div class="text-2xl font-bold">Bonus</div>
+        <button class="text-white/60 hover:text-white text-xl" @click="showBonus = false" type="button">✕</button>
+      </div>
+      <div class="text-[16px] opacity-90 leading-8">
+        若你是 <span class="font-semibold">fork 我原本的 TDX_BUS_DEMO 範例專案</span> 後繼續開發（並保留開發紀錄），可獲得額外加分。
+        <div class="text-sm opacity-70 mt-3">
+          建議：保留 fork 關係、在你自己的 repo 上 commit，並在 README 寫明你新增 / 修改了哪些功能。
+        </div>
+      </div>
+      <div class="mt-6 flex items-center justify-end">
       </div>
     </div>
   </div>
-</div>
 
+</div>
 
 ---
 layout: default

@@ -1,13 +1,16 @@
 <script setup>
 import { ref, computed } from 'vue'
 
-const team = ref('')
+const name = ref('')
 const repoUrl = ref('')
 const note = ref('')
 const loading = ref(false)
 const message = ref('')
 const ok = ref(false)
-
+const email = ref('')
+const isValidEmail = computed(() =>
+  /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())
+)
 const isValidUrl = computed(() => {
   try {
     const u = new URL(repoUrl.value.trim())
@@ -21,8 +24,8 @@ async function submit() {
   message.value = ''
   ok.value = false
 
-  if (!team.value.trim()) {
-    message.value = '請填組別'
+  if (!name.value.trim()) {
+    message.value = '請填名字'
     return
   }
   if (!isValidUrl.value) {
@@ -36,7 +39,8 @@ async function submit() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        team: team.value.trim(),
+        name: name.value.trim(),
+        email: email.value.trim(),
         repoUrl: repoUrl.value.trim(),
         note: note.value.trim(),
         // passcode: passcode.value.trim(),通關碼，避免被濫用
@@ -48,11 +52,15 @@ async function submit() {
       message.value = data?.error || `送出失敗（${res.status}）`
       return
     }
+    if (!isValidEmail.value) {
+      message.value = '請輸入有效的電子信箱'
+      return
+    }
 
     ok.value = true
-    message.value = '已送出！你可以去找助教確認是否有收到 ✅'
+    message.value = '已送出！你可以去找助教確認是否有收到'
     // 可選：送出後鎖住輸入，或清空
-    // team.value = ''; repoUrl.value=''; note.value=''
+    // name.value = ''; repoUrl.value=''; note.value=''
   } catch (e) {
     message.value = '送出失敗：網路或伺服器錯誤'
   } finally {
@@ -65,15 +73,20 @@ async function submit() {
   <div class="p-5 rounded-3xl border border-white/10 bg-white/5 backdrop-blur">
     <div class="text-xl font-bold mb-3">Repo 繳交</div>
 
-    <div class="grid gap-3">
-      <label class="text-sm opacity-80">組別</label>
-      <input v-model="team" class="p-2 rounded-lg bg-black/30 border border-white/10" placeholder="例如：第 3 組" />
+    <div class="grid gap-2">
+      <label class="text-sm opacity-80">名字</label>
+      <input v-model="name" class="p-1 rounded-lg bg-black/30 border border-white/10" placeholder="請填寫你的名字" />
 
       <label class="text-sm opacity-80">GitHub Repo 連結</label>
-      <input v-model="repoUrl" class="p-2 rounded-lg bg-black/30 border border-white/10" placeholder="https://github.com/xxx/yyy" />
+      <input v-model="repoUrl" class="p-1 rounded-lg bg-black/30 border border-white/10" placeholder="https://github.com/xxx/yyy" />
+
+      <label class="text-sm opacity-80">聯絡信箱</label>
+      <input v-model="email" class="p-2 rounded-lg bg-black/30 border border-white/10" placeholder="example@gmail.com" />
+
 
       <label class="text-sm opacity-80">備註（可選）</label>
-      <input v-model="note" class="p-2 rounded-lg bg-black/30 border border-white/10" placeholder="例如：專案完成度/呈現方式/發表需求" />
+      <input v-model="note" class="p-1 rounded-lg bg-black/30 border border-white/10" placeholder="例如：專案完成度/呈現方式/發表需求" />
+
 
       <button
         class="mt-2 px-4 py-2 rounded-lg bg-white/15 hover:bg-white/20 border border-white/10 disabled:opacity-50"
