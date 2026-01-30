@@ -22,7 +22,7 @@ tdx-bus-demo/
 
 ## 環境變數
 - 複製 `.env.example` 成 `backend/.env`，填入 `TDX_APP_ID`、`TDX_APP_KEY`
-- 複製 `.env.example` 成 `frontend/.env`，調整 `VITE_API_BASE` 如需要
+- 複製 `.env.example` 成 `frontend/.env`，調整 `VITE_API_BASE` 
 
 ## 啟動 Backend（FastAPI）
 ```powershell
