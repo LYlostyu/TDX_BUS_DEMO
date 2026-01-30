@@ -2,6 +2,8 @@
 
 Windows-friendly demo that proxies TDX 公車 API with FastAPI and shows ETA per stop via a Vue (Vite) UI.
 
+這是一個適用於 Windows 的演示程序，它使用 FastAPI 代理 TDX 公交 API，並透過 Vue (Vite) UI 顯示每個站點的預計到達時間。
+
 ## 專案結構
 
 ```
@@ -46,7 +48,7 @@ copy ..\.env.example .env  # 或手動建立
 npm install
 npm run dev -- --host
 ```
-預設會呼叫 `http://localhost:8000` 作為 API。
+預設會呼叫 http://localhost:8000 作為 API。
 
 ## 啟動 Slidev（投影片簡報）
 ```powershell
@@ -54,13 +56,13 @@ cd slidev
 npm install
 npx slidev
 ```
-預設會在 `http://localhost:3030` 開啟投影片展示。
+預設會在 http://localhost:3030 開啟投影片展示。
 
 Slidev 是一個基於 Markdown 的投影片框架，簡報內容在 `slides.md` 中維護。
 
 ## 使用方式
-1. 啟動 backend 與 frontend
-2. 打開瀏覽器 `http://localhost:5173`
+1. 啟動 `backend` 與 `frontend`
+2. 打開瀏覽器 http://localhost:5173
 3. 輸入路線號碼（如 307），選擇城市（Taipei / NewTaipei 等），點擊「查詢」
 4. 介面會顯示去程/回程分頁與各站預估到站時間
 
@@ -68,3 +70,7 @@ Slidev 是一個基於 Markdown 的投影片框架，簡報內容在 `slides.md`
 - TDX City 參數請依官方代碼，常見：`Taipei`, `NewTaipei`, `Taoyuan`, `Taichung`, `Tainan`, `Kaohsiung`
 - 若要修改 CORS，調整 `FRONTEND_ORIGIN`（backend `.env`）
 - 如需部署，請改用正式的 Node / Uvicorn 啟動參數並處理憑證/Token 續期
+
+## 笑話
+Q: 為什麼工程師的年薪都那麼高？
+A: 時薪又不高
