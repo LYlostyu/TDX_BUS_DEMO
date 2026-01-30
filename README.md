@@ -1,9 +1,6 @@
 # TDX Bus ETA (FastAPI + Vue)
 
 
-
-## 專案結構
-
 ```
 tdx-bus-demo/
 ├─ backend/            # FastAPI service
