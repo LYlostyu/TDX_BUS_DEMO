@@ -69,3 +69,6 @@ Slidev 是一個基於 Markdown 的投影片框架，簡報內容在 `slides.md`
 - 若要修改 CORS，調整 `FRONTEND_ORIGIN`（backend `.env`）git
 - 如需部署，請改用正式的 Node / Uvicorn 啟動參數並處理憑證/Token 續期
 testgit add README.md
+
+
+DDDDASHDHSAHDJSAHDA
