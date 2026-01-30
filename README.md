@@ -1,31 +1,70 @@
-🚍 TDX Bus ETA: Modern Transit TrackerA high-performance, asynchronous proxy service and reactive frontend for Taiwan's TDX Transport Data.這是為了拯救那些受夠了官方 App 臃腫緩慢的人類而生的。透過 FastAPI 的非同步架構與 Vue 3 的響應式介面，提供極速、無廣告的公車動態查詢體驗。⚡ Key Features (核心功能)🚀 Asynchronous Core: 後端採用 FastAPI + HTTPX，完全非同步處理 TDX API 請求，高併發下依然穩如泰山。🛡️ Type-Safe Architecture: 嚴格的資料流控制，後端資料清洗後直出前端，拒絕 undefined 災難。⚡ Lightning Fast UI: 基於 Vite 建構的 Vue 3 前端，HMR (Hot Module Replacement) 快到讓你忘記什麼是編譯時間。🔄 Smart Proxying: 內建 CORS 處理與資料聚合 (Aggregation)，解決前端直接呼叫 TDX 的跨域與 Token 驗證痛點。📊 Slidev Integration: 內建開發者簡報模式，Code Review 或技術分享隨開隨講。🛠️ Tech Stack (技術堆疊)Backend (The Brain)Framework: FastAPI (ASGI)Runtime: Python 3.10+Dependency Management: pip / venvUtilities: python-dotenv, httpxFrontend (The Face)Framework: Vue 3 (Composition API)Build Tool: ViteNode Version: Node.js 18+🚀 Quick Start (極速啟動)別浪費時間，照著做。1. Environmental Setup你需要先搞定 TDX 的鑰匙。Bash# Backend Config
-cp .env.example backend/.env
-# 填入你的 TDX_APP_ID 與 TDX_APP_KEY (不要把這個 push 到 git 上，拜託)
+# TDX Bus ETA (FastAPI + Vue)
 
-# Frontend Config
-cp .env.example frontend/.env
-2. Ignite the Backend啟動高效能 API 服務。PowerShell# 在專案根目錄
+Windows-friendly demo that proxies TDX 公車 API with FastAPI and shows ETA per stop via a Vue (Vite) UI.
+
+## 專案結構
+
+```
+tdx-bus-demo/
+├─ backend/            # FastAPI service
+│  ├─ app/main.py
+│  └─ requirements.txt
+├─ frontend/           # Vue 3 + Vite UI
+│  ├─ index.html
+│  └─ src/
+├─ .env.example        # 範例環境變數
+└─ .github/            # PR / issue templates
+```
+
+## 安裝需求
+- Python 3.10+（建議使用 venv）
+- Node.js 18+ / npm 8+
+
+## 環境變數
+- 複製 `.env.example` 成 `backend/.env`，填入 `TDX_APP_ID`、`TDX_APP_KEY`
+- 複製 `.env.example` 成 `frontend/.env`，調整 `VITE_API_BASE` 如需要
+
+## 啟動 Backend（FastAPI）
+```powershell
 python -m venv .venv
 .\.venv\Scripts\activate
 pip install -r backend/requirements.txt
-
+copy .env.example backend\.env  # 或手動建立
 cd backend
 python app/main.py
-# Server is now listening on http://localhost:8000 🚀
-3. Launch the Frontend啟動現代化 UI。PowerShell# 開一個新的 terminal
+```
+
+### 主要 API
+- `GET /api/routes/{route}/eta?city=Taipei` — 直通 `/v2/Bus/EstimatedTimeOfArrival/City/{City}/{RouteName}`
+- `GET /api/routes/{route}/stops?city=Taipei` — 直通 `/v2/Bus/StopOfRoute/City/{City}/{RouteName}`
+- `GET /api/routes/{route}/stop-etas?city=Taipei` — 後端合併站點順序與 ETA，前端使用
+
+## 啟動 Frontend（Vite + Vue）
+```powershell
 cd frontend
+copy ..\.env.example .env  # 或手動建立
 npm install
 npm run dev -- --host
-# UI is live at http://localhost:5173 ✨
-🔌 API Endpoints後端不只是轉發，還幫你做了髒活（資料正規化）。MethodEndpointDescriptionGET/api/routes/{route}/eta取得原始 ETA 資料 (Proxy /v2/Bus/EstimatedTimeOfArrival)GET/api/routes/{route}/stops取得原始站序資料 (Proxy /v2/Bus/StopOfRoute)GET/api/routes/{route}/stop-etas🔥 Killer Feature: 自動合併「站序」與「預估時間」，前端直接渲染即可Query Param: ?city=Taipei (Default)Supported Cities: Taipei, NewTaipei, Taoyuan, Taichung, Tainan, Kaohsiung ...📂 Project Structure乾淨的架構是工程師的尊嚴。Plaintexttdx-bus-demo/
-├── backend/            # Python FastAPI Service
-│   ├── app/
-│   │   ├── main.py     # Application Entry Point
-│   │   └── ...
-│   └── requirements.txt
-├── frontend/           # Vue 3 + Vite Application
-│   ├── src/
-│   └── ...
-├── slidev/             # Developer Presentation (Markdown based)
-└── .github/            # CI/CD & Templates
-⚠️ Disclaimer本專案使用交通部 TDX 運輸資料流通服務平臺 API。請勿濫用 API 額度，若因頻繁請求導致 IP 被 Ban，請自行負責。This tool is provided "as is" without warranty of any kind.
+```
+預設會呼叫 `http://localhost:8000` 作為 API。
+
+## 啟動 Slidev（投影片簡報）
+```powershell
+cd slidev
+npm install
+npx slidev
+```
+預設會在 `http://localhost:3030` 開啟投影片展示。
+
+Slidev 是一個基於 Markdown 的投影片框架，簡報內容在 `slides.md` 中維護。
+
+## 使用方式
+1. 啟動 backend 與 frontend
+2. 打開瀏覽器 `http://localhost:5173`
+3. 輸入路線號碼（如 307），選擇城市（Taipei / NewTaipei 等），點擊「查詢」
+4. 介面會顯示去程/回程分頁與各站預估到站時間
+
+## 備註
+- TDX City 參數請依官方代碼，常見：`Taipei`, `NewTaipei`, `Taoyuan`, `Taichung`, `Tainan`, `Kaohsiung`
+- 若要修改 CORS，調整 `FRONTEND_ORIGIN`（backend `.env`）
+- 如需部署，請改用正式的 Node / Uvicorn 啟動參數並處理憑證/Token 續期
