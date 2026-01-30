@@ -1,0 +1,59 @@
+以下是TDX Bus Demo專案中曾經修改過的檔案列表：
+
+## 修改過的檔案
+
+### Backend 後端檔案
+1. **backend/app/main.py**
+   - 添加了位置信息提取 (StopPosition -> lat/lon)
+   - 新增了 fetch_routes() 函數
+   - 添加了 GET /api/routes API 端點來獲取城市路線列表
+
+### Frontend 前端檔案
+2. **frontend/src/App.vue**
+   - 添加了台灣各縣市行政區對應表 (districtsByCity)
+   - 新增了行政區選擇下拉選單
+   - 重新排列了查詢表單順序 (城市 -> 行政區 -> 路線輸入)
+   - 添加了每分鐘自動更新機制
+   - 新增了自動更新狀態指示器
+   - 實現了站牌名稱點擊開啟Google Maps功能
+   - 添加了mapUrl()函數生成地圖連結
+   - 優化了過濾邏輯以支援行政區過濾
+
+### 文檔檔案
+3. **README.md**
+   - 添加了現在時間顯示功能的說明（顯示台灣時間）
+   - 更新了使用說明以反映新的查詢流程
+   - 添加了自動更新功能的說明
+   - 擴展了支援的縣市列表說明
+   - 修改了查詢步驟順序
+
+### 組態檔案
+4. **backend/.env**
+   - 包含TDX API的認證資訊 (由系統管理)
+
+### 測試檔案 (已刪除)
+5. **test_tdx_api.py** (已刪除)
+   - 用於測試TDX API響應結構的臨時檔案
+
+### 專案結構
+- 專案根目錄: TDX_BUS_DEMO/
+- 前端目錄: frontend/ (Vue 3 + Vite)
+- 後端目錄: backend/ (FastAPI + Python)
+- 其他目錄: slidev/ (簡報), .github/ (PR模板)
+
+## 主要功能變更
+
+1. **擴展縣市支援**: 從6都擴展到台灣全境22個縣市
+2. **行政區過濾**: 添加動態行政區選擇和過濾功能
+3. **自動更新**: 每分鐘自動更新公車到站資訊
+4. **地圖整合**: 點擊站牌名稱開啟Google Maps定位
+5. **UI優化**: 重新設計查詢流程和介面佈局
+6. **現在時間顯示**: 頁面右上角顯示目前的台灣時間，方便用戶掌握查詢時的時間參考
+
+## 技術架構
+
+- **前端**: Vue 3 Composition API + Vite
+- **後端**: FastAPI + httpx (異步HTTP客戶端)
+- **API**: TDX Transport Data eXchange (交通資料交換平台)
+- **地圖**: Google Maps 整合
+- **即時更新**: setInterval 定時器實現

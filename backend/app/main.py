@@ -187,6 +187,10 @@ def merge_stop_eta(
                         "zh": (s.get("StopName") or {}).get("Zh_tw"),
                         "en": (s.get("StopName") or {}).get("En"),
                     },
+                    "position": {
+                        "lat": (s.get("StopPosition") or {}).get("PositionLat"),
+                        "lon": (s.get("StopPosition") or {}).get("PositionLon"),
+                    },
                     "estimate_seconds": eta.get("EstimateTime"),
                     "stop_status": eta.get("StopStatus"),
                     "plate_numb": eta.get("PlateNumb"),
