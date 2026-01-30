@@ -1,8 +1,5 @@
 # TDX Bus ETA (FastAPI + Vue)
 
-Windows-friendly demo that proxies TDX 公車 API with FastAPI and shows ETA per stop via a Vue (Vite) UI.
-
-## 專案結構
 
 ```
 TDX_BUS_DEMO/
