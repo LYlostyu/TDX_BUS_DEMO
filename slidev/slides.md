@@ -4,7 +4,7 @@ title: Git 教學
 info: |
   本課程：Git 基礎概念與核心指令（本地工作流）
 author: Luoyu
-version: 2.2
+version: 2.3
 layout: cover
 class: text-left
 ---
@@ -38,7 +38,7 @@ class: text-left
   </div>
 
   <div class="mt-8 text-base opacity-70">
-    講師：洛魚　|　版本：v2.2
+    講師：洛魚　|　版本：v2.3
   </div>
 </div>
 
@@ -1881,6 +1881,140 @@ PR = 請求把你分支上的變更合併進原 repo 的 main
   </div>
 
 </div>
+
+---
+layout: two-cols-header
+---
+
+# 練習：把本地專案上傳到 GitHub
+### 任務：完成「建立遠端 Repo → 本地初始化 → 第一次 push」
+<div class="text-sm opacity-80">
+目標：把你電腦上的專案成功推上 GitHub，並在 Repo 頁面看到專案出現
+</div>
+
+::left::
+<div class="pr-5 mt-2">
+1. GitHub 建立新 Repo
+<div class="text-sm">到 GitHub → New repository</div>
+
+<ul class="text-sm">
+  <li>填 Repo 名稱</li>
+  <li>Public / Private 自選</li>
+  <li><b>不要勾 Initialize with README</b>（本地已有專案）</li>
+</ul>
+
+<div class="text-sm opacity-70 mt-2">
+建立後，複製 HTTPS Repo URL（例如：<code>https://github.com/你/專案.git</code>）
+</div>
+</div>
+
+<div class="pr-5 mt-6">
+2. 確認你在專案資料夾（本地）
+<div class="text-sm">在終端機切到你的專案資料夾</div>
+
+```bash
+cd your_project_folder
+```
+
+<div class="text-sm opacity-70 mt-2">
+輸入<code>ls</code>看一下是不是你的專案檔
+</div>
+</div>
+
+::right::
+
+<div class="pr-5 mt-2">
+3. 初始化、加入檔案、第一次 commit
+<div class="text-sm">讓 Git 開始管理這個資料夾</div>
+
+```bash
+git init
+git add .
+git commit -m "Initial commit"
+```
+
+<div class="text-sm opacity-70 mt-2">
+用 <code>git status</code> 檢查乾不乾淨，理想狀態：沒有待提交的檔案
+</div>
+
+```bash
+git status
+```
+
+</div>
+
+<style>
+pre { margin: .35rem 0 !important; }
+</style>
+
+---
+layout: two-cols-header
+---
+
+# 練習：把本地專案上傳到 GitHub
+### 任務：連接遠端 origin，推送到 main（push）
+<div class="text-sm opacity-80">
+完成 push，並在 GitHub Repo 頁面看到你的檔案；使用 git push -u 未來只要 <code>git push</code> 就能更新
+</div>
+
+::left::
+<div class="pr-5 mt-2">
+4. 連接遠端 Repo（設定 origin）
+<div class="text-sm">把 GitHub Repo URL 加到遠端</div>
+
+```bash
+git remote add origin https://github.com/"你的名字"/"專案名稱".git
+```
+
+<div class="text-sm opacity-70 mt-2">
+檢查是否有成功設定（會看到 fetch / push 兩行）
+</div>
+
+```bash
+git remote -v
+```
+
+</div>
+
+<div class="pr-5 mt-6">
+5. 設定主分支名稱為 main
+<div class="text-sm">避免本地是 master、遠端是 main 分支名不同導致推不上去</div>
+
+```bash
+git branch -M main
+```
+
+</div>
+
+::right::
+
+<div class="pr-5 mt-2">
+6. 第一次 push 到 GitHub
+<div class="text-sm">第一次推送要加 <code>-u</code> 綁定預設遠端分支</div>
+
+```bash
+git push -u origin main
+```
+
+<div class="text-sm opacity-70 mt-3">
+之後更新流程就是：改檔 → <code>git add .</code> → <code>git commit</code> → <code>git push</code>
+</div>
+</div>
+
+<div class="pr-5 mt-6">
+常見錯誤：遠端已經有 README
+<div class="text-sm">先把遠端拉下來合併，再 push</div>
+
+```bash
+git pull origin main --allow-unrelated-histories
+git push
+```
+
+</div>
+
+<style>
+pre { margin: .35rem 0 !important; }
+</style>
 
 ---
 layout: two-cols-header
