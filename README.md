@@ -29,8 +29,7 @@ tdx-bus-demo/
 python -m venv .venv
 .\.venv\Scripts\activate
 pip install -r backend/requirements.txt
-copy .env.example backend\.env  # 或手動建立
-cd backend
+copy .env.example backend\.env
 python app/main.py
 ```
 
@@ -42,8 +41,7 @@ python app/main.py
 ## 啟動 Frontend（Vite + Vue）
 ```powershell
 cd frontend
-copy ..\.env.example .env  # 或手動建立
-npm install
+copy ..\.env.example .env
 npm run dev -- --host
 ```
 預設會呼叫 `http://localhost:8000` 作為 API。
