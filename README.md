@@ -5,32 +5,61 @@ Windows-friendly demo that proxies TDX 公車 API with FastAPI and shows ETA per
 ## 專案結構
 
 ```
-tdx-bus-demo/
+TDX_BUS_DEMO/
 ├─ backend/            # FastAPI service
 │  ├─ app/main.py
-│  └─ requirements.txt
-├─ frontend/           # Vue 3 + Vite UI
-│  ├─ index.html
-│  └─ src/
-├─ .env.example        # 範例環境變數
-└─ .github/            # PR / issue templates
+│  ├─ requirements.txt
+│  └─ .env.example        # 範例環境變數
+└─ frontend/           # Vue 3 + Vite UI
+   ├─ index.html
+   ├─ src/
+   └─ .env.example        # 範例環境變數
 ```
 
 ## 安裝需求
 - Python 3.10+（建議使用 venv）
 - Node.js 18+ / npm 8+
 
-## 環境變數
-- 複製 `.env.example` 成 `backend/.env`，填入 `TDX_APP_ID`、`TDX_APP_KEY`
-- 複製 `.env.example` 成 `frontend/.env`，調整 `VITE_API_BASE` 如需要
+## Backend (FastAPI)
 
-## 啟動 Backend（FastAPI）
+### 環境設置
+
+先回到 repo 資料夾根目錄
+
+**Windows CMD**:
 ```powershell
+cd backend
 python -m venv .venv
 .\.venv\Scripts\activate
-pip install -r backend/requirements.txt
-copy .env.example backend\.env  # 或手動建立
+pip install -r requirements.txt
+copy .env.example .env
+```
+
+**Windows PowerShell**:
+```powershell
 cd backend
+python -m venv .venv
+.\.venv\Scripts\activate.ps1
+pip install -r requirements.txt
+copy .env.example .env
+```
+
+**Unix shell (Mac & Linux)**:
+```bash
+cd backend
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env
+```
+
+### 調整 .env 參數
+
+- `.env` (位於`backend/.env`) 中填入 `TDX_APP_ID`、`TDX_APP_KEY`
+- 調整 `VITE_API_BASE` 如需要
+
+### 啟動程式
+```bash
 python app/main.py
 ```
 
@@ -39,13 +68,32 @@ python app/main.py
 - `GET /api/routes/{route}/stops?city=Taipei` — 直通 `/v2/Bus/StopOfRoute/City/{City}/{RouteName}`
 - `GET /api/routes/{route}/stop-etas?city=Taipei` — 後端合併站點順序與 ETA，前端使用
 
-## 啟動 Frontend（Vite + Vue）
-```powershell
+## Frontend（Vite + Vue）
+
+### 環境設置
+
+先回到 repo 資料夾根目錄
+
+**Windows CMD & PowerShell**:
+```cmd
 cd frontend
-copy ..\.env.example .env  # 或手動建立
+copy .env.example .env
 npm install
+```
+
+**Unix shell (Mac & Linux)**:
+```bash
+cd frontend
+cp .env.example .env
+npm install
+```
+
+### 啟動程式
+```bash
 npm run dev -- --host
 ```
+
+
 預設會呼叫 `http://localhost:8000` 作為 API。
 
 ## 啟動 Slidev（投影片簡報）
