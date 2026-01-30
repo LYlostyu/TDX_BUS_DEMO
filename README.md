@@ -3,17 +3,16 @@
 Windows-friendly demo that proxies TDX 公車 API with FastAPI and shows ETA per stop via a Vue (Vite) UI.
 
 ## 專案結構
-
 ```
 tdx-bus-demo/
-├─ backend/            # FastAPI service
+├─ backend/            
 │  ├─ app/main.py
 │  └─ requirements.txt
-├─ frontend/           # Vue 3 + Vite UI
+├─ frontend/           
 │  ├─ index.html
 │  └─ src/
-├─ .env.example        # 範例環境變數
-└─ .github/            # PR / issue templates
+├─ .env.example       
+└─ .github/            
 ```
 
 ## 安裝需求
@@ -29,7 +28,7 @@ tdx-bus-demo/
 python -m venv .venv
 .\.venv\Scripts\activate
 pip install -r backend/requirements.txt
-copy .env.example backend\.env  # 或手動建立
+copy .env.example backend\.env
 cd backend
 python app/main.py
 ```
@@ -42,7 +41,7 @@ python app/main.py
 ## 啟動 Frontend（Vite + Vue）
 ```powershell
 cd frontend
-copy ..\.env.example .env  # 或手動建立
+copy ..\.env.example .env
 npm install
 npm run dev -- --host
 ```
