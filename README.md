@@ -29,7 +29,7 @@ tdx-bus-demo/
 python -m venv .venv
 .\.venv\Scripts\activate
 pip install -r backend/requirements.txt
-copy .env.example backend\.env  # 或手動建立
+copy .env.example backend\.env
 cd backend
 python app/main.py
 ```
@@ -42,7 +42,7 @@ python app/main.py
 ## 啟動 Frontend（Vite + Vue）
 ```powershell
 cd frontend
-copy ..\.env.example .env  # 或手動建立
+copy ..\.env.example .env
 npm install
 npm run dev -- --host
 ```
