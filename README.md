@@ -53,6 +53,8 @@ pip install -r requirements.txt
 cp .env.example .env
 ```
 
+### 調整 .env 參數
+
 - `.env` (位於`backend/.env`) 中填入 `TDX_APP_ID`、`TDX_APP_KEY`
 - 調整 `VITE_API_BASE` 如需要
 
